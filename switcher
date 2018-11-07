@@ -1,0 +1,124 @@
+#!/bin/bash
+#Routine to check or relink a config file
+
+CONFDIR=/home/pi-star/configs
+
+version () {
+ echo "Version: $(basename $0) 0.9.1 08Nov18"
+}
+
+createdir () {
+ if [ ! -d $CONFDIR ] ; then
+  sleep 1
+  sudo mount -o remount,rw /
+  mkdir $CONFDIR
+  sleep 1
+  sudo mount -o remount,ro /
+fi
+}
+
+findcurrent () {
+mcurr="None"
+for f in `ls -1 $CONFDIR/m*` ; do  if cmp -s /etc/mmdvmhost $f; then  mcurr=`basename $f`; fi ; done
+#mcurr=`readlink /etc/mmdvmhost | xargs -n 1 basename`
+}
+
+usage () {
+ echo "Usage: $(basename $0) [-i] [-l] [-s profile] [-X profile]"
+ echo "      -i  return current matched profile"
+ echo "      -h  This help text"
+ echo "      -l  return current list of profiles"
+ echo "      -s profile  replace mmdvmhost"
+ echo "      -t   as yet unspecified test"
+ echo "      -v   version"
+ echo "      -X profile  copy current mmdvmhost to configs/profile"
+ echo "      -O  paramater to -X to confirm overwrite"
+ echo ""
+ echo ""
+ echo "expects files to be in '$CONFDIR'/m0-xxxx"
+ echo ""
+ echo ""
+}
+
+#starting
+mand=
+if [ "$1" != "" ]; then
+ overwrite=
+ outinfo=
+ outlist=
+ oswitch=
+ outtest=
+ ocreate=
+
+
+ # for future state with multiple options
+ while getopts "ihlOs:tvX:" opt
+ do
+   case $opt in
+     i ) outinfo=0 ;;
+     h ) usage ; exit 0 ;;
+     l ) outlist=0 ;;
+     s ) profile="$OPTARG" ; oswitch=0 ;;
+     l ) outlist=0 ;;
+     t ) outtest=0 ;;
+     v ) version ; exit 0 ;;
+     X ) profile="$OPTARG" ; ocreate=0 ;;
+     O ) overwrite=1 ;;
+     \? ) usage ; exit 0 ;;
+   esac
+ done
+ shift $(($OPTIND -1))
+ #  $* is left over
+ if [ -n "$ocreate" ] ; then
+ # this did more when i tried linking leaving here for better initial state testing later
+   ignorecurrent=1
+ else
+   findcurrent
+ fi
+else
+ usage
+fi
+
+if [  -n "$outinfo" ]; then
+  echo "current profile: " $mcurr
+fi
+
+if [  -n "$outlist" ]; then
+  ls -1 $CONFDIR/m* | xargs -n 1 basename
+fi
+
+if [  -n "$oswitch" ]; then
+  echo "switching"
+ if [ ! -f $CONFDIR/$profile ]; then
+   echo "profile: $profile not found"
+   exit 0
+ else
+   mnext=`basename $CONFDIR/$profile`
+ fi
+ if [ $mnext = "$mcurr" ]; then
+   echo " same as current profile $mcurr:$mnext "
+   exit 0
+ fi
+ sleep 1
+ sudo mount -o remount,rw /
+ sudo cp  $CONFDIR/$profile /etc/mmdvmhost
+ sudo cp  $CONFDIR/d$profile /etc/dmrgateway
+ sleep 1
+ sudo mount -o remount,ro /
+ sleep 1
+ sudo systemctl restart mmdvmhost.service
+fi
+
+if [  -n "$ocreate" ]; then
+  createdir
+  if [  -f $CONFDIR/$profile ] && [ "$overwrite" != "1" ] ; then
+    echo "profile: $profile exists specify overwrite -O"
+  else
+   sleep 1
+   sudo mount -o remount,rw /
+   cp /etc/mmdvmhost  $CONFDIR/$profile
+   cp /etc/dmrgateway  $CONFDIR/d$profile
+   sleep 1
+   sudo mount -o remount,ro /
+  fi
+fi

@@ -24,20 +24,28 @@ for f in `ls -1 $CONFDIR/m*` ; do  if cmp -s /etc/mmdvmhost $f; then  mcurr=`bas
 }
 
 usage () {
- echo "Usage: $(basename $0) [-i] [-l] [-s profile] [-X profile]"
+ echo "Usage: $(basename $0) [ -i|-l|-s profile|-X profile [-O]]"
+ echo ""
  echo "      -i  return current matched profile"
  echo "      -h  This help text"
  echo "      -l  return current list of profiles"
  echo "      -s profile  replace mmdvmhost"
  echo "      -t   as yet unspecified test"
  echo "      -v   version"
- echo "      -X profile  copy current mmdvmhost to configs/profile"
- echo "      -O  paramater to -X to confirm overwrite"
+ echo "      -X profile  copy current mmdvmhost etc to configs/profile"
+ echo "      -O  option to -X to confirm overwrite"
  echo ""
  echo ""
  echo "expects files to be in '$CONFDIR'/m0-xxxx"
  echo ""
+ echo "Example: $(basename $0) -X m3-dmrg"
+ echo "Will copy current mmdvmhost, dmrgateway, ...  into configs folder as m3-dmrg, dm3-dmrg"
+ echo " If this profile already exists use append -O to confirm overwriting"
  echo ""
+ echo " $(basename $0) -s m1-ipsc"
+ echo "Will copy profile m1-ipsc, dm1-ipsc to  mmdvmhost, dmrgateway, ... and restart"
+
+ exit 0
 }
 
 #starting
@@ -52,11 +60,11 @@ if [ "$1" != "" ]; then
 
 
  # for future state with multiple options
- while getopts "ihlOs:tvX:" opt
- do
+ while getopts "ihlOs:tvX:" opt ; do
    case $opt in
+
      i ) outinfo=0 ;;
-     h ) usage ; exit 0 ;;
+     h ) usage ;;
      l ) outlist=0 ;;
      s ) profile="$OPTARG" ; oswitch=0 ;;
      l ) outlist=0 ;;
@@ -64,7 +72,7 @@ if [ "$1" != "" ]; then
      v ) version ; exit 0 ;;
      X ) profile="$OPTARG" ; ocreate=0 ;;
      O ) overwrite=1 ;;
-     \? ) usage ; exit 0 ;;
+    \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
    esac
  done
  shift $(($OPTIND -1))

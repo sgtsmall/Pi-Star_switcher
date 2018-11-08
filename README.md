@@ -37,6 +37,26 @@ See: https://github.com/sgtsmall/Pi-Star_switcher/tree/master/docs/Installation.
 
 ## Documentation
 
+```
+Usage: switcher [ -i|-l|-s profile|-X profile [-O]]
+
+      -i  return current matched profile
+      -h  This help text
+      -l  return current list of profiles
+      -s profile  replace mmdvmhost
+      -t   as yet unspecified test
+      -v   version
+      -X profile  copy current mmdvmhost etc to configs/profile
+      -O  option to -X to confirm overwrite
+
+Example: switcher -X m3-dmrg
+Will copy current mmdvmhost, dmrgateway, ...  into configs folder as m3-dmrg, dm3-dmrg
+ If this profile already exists use append -O to confirm overwriting
+
+      switcher -s m1-ipsc
+Will copy profile m1-ipsc, dm1-ipsc to  mmdvmhost, dmrgateway, ... and restart
+```
+
 There will be lots of documentation here: https://github.com/sgtsmall/Pi-Star_switcher/tree/master/docs (oneday)
 
 ## Support

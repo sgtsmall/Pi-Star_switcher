@@ -109,8 +109,8 @@ if [  -n "$oswitch" ]; then
  sleep 1
  sudo mount -o remount,ro /
  sleep 1
- #sudo systemctl start mmdvmhost.service > /dev/null 2>/dev/null
- #sudo systemctl start dmrgateway.service > /dev/null 2>/dev/null
+ sudo systemctl start mmdvmhost.service > /dev/null 2>/dev/null
+ sudo systemctl start dmrgateway.service > /dev/null 2>/dev/null
  sudo systemctl start pistar-watchdog.service > /dev/null 2>/dev/null
  sudo mount -o remount,ro /
  sleep 1

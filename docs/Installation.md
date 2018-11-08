@@ -33,3 +33,13 @@ cd
 
 Then run
 ```switcher -h```
+
+
+For updates
+
+```
+rpi-rw
+cd Pi-Star_switcher
+git pull origin master
+sudo make install
+```

@@ -101,6 +101,7 @@ if [  -n "$oswitch" ]; then
  fi
  sudo systemctl stop mmdvmhost.service > /dev/null 2>/dev/null
  sudo systemctl stop dmrgateway.service > /dev/null 2>/dev/null
+ sudo systemctl stop pistar-watchdog.service > /dev/null 2>/dev/null
  sleep 1
  sudo mount -o remount,rw /
  sudo cp  $CONFDIR/$profile /etc/mmdvmhost
@@ -108,8 +109,9 @@ if [  -n "$oswitch" ]; then
  sleep 1
  sudo mount -o remount,ro /
  sleep 1
- sudo systemctl start mmdvmhost.service > /dev/null 2>/dev/null
- sudo systemctl start dmrgateway.service > /dev/null 2>/dev/null
+ #sudo systemctl start mmdvmhost.service > /dev/null 2>/dev/null
+ #sudo systemctl start dmrgateway.service > /dev/null 2>/dev/null
+ sudo systemctl start pistar-watchdog.service > /dev/null 2>/dev/null
  sudo mount -o remount,ro /
  sleep 1
 fi

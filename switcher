@@ -131,7 +131,7 @@ if [  -n "$oswitch" ]; then
  sudo mount -o remount,rw /
  sudo cp  $CONFDIR/m$profile /etc/mmdvmhost
  sudo cp  $CONFDIR/d$profile /etc/dmrgateway
- sudo cp  $CONFDIR/y$profile /etc/dmrgateway
+ sudo cp  $CONFDIR/y$profile /etc/ysfgateway
  sudo cp  $CONFDIR/p$profile /etc/p25gateway
  sudo cp  $CONFDIR/n$profile /etc/nxdngateway
  sudo cp  $CONFDIR/yd$profile /etc/ysf2dmr

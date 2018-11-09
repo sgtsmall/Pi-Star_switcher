@@ -48,13 +48,23 @@ Usage: switcher [ -i|-l|-s profile|-X profile [-O]]
       -v   version
       -X profile  copy current mmdvmhost etc to configs/profile
       -O  option to -X to confirm overwrite
+         profile stored as Xn-YYYY
+             X - internal value based on config ie m - mmdvmhost d - dstargateway y - ysfgateway ...
+             n - user supplied profile number e.g. 0
+             YYYY - user supplied short name
+       TIDY UP syntax of X and s ie   X needs  0-ipsc to create m0-ipsc s just needs 0 or ipsc
 
-Example: switcher -X m3-dmrg
-Will copy current mmdvmhost, dmrgateway, ...  into configs folder as m3-dmrg, dm3-dmrg
- If this profile already exists use append -O to confirm overwriting
+            profile field will search for  n or YYYY or n-YYYY
+      files stored as '$CONFDIR'/m0-xxxx
 
-      switcher -s m1-ipsc
-Will copy profile m1-ipsc, dm1-ipsc to  mmdvmhost, dmrgateway, ... and restart
+      Example: $(basename $0) -X 3-bmes
+      Will copy current mmdvmhost, dmrgateway, ...  into configs folder as m3-dmrg, d3-dmrg
+       If this profile already exists use append -O to confirm overwriting
+
+       $(basename $0) -s 0 or
+       $(basename $0) -s ipsc or
+       $(basename $0) -s 0-ipsc
+      Will copy profile m0-ipsc, d0-ipsc to  mmdvmhost, dmrgateway, ... and restart
 ```
 
 There will be lots of documentation here: https://github.com/sgtsmall/Pi-Star_switcher/tree/master/docs (oneday)

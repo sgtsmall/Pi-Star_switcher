@@ -4,7 +4,7 @@
 CONFDIR=/home/pi-star/configs
 
 version () {
- echo "Version: $(basename $0) 0.9.1 08Nov18"
+ echo "Version: $(basename $0) 0.9.2 09Nov18"
 }
 
 createdir () {
@@ -16,7 +16,11 @@ createdir () {
   sudo mount -o remount,ro /
 fi
 }
-
+findprof () {
+  local __proftest=$1
+  local proffind=`find $CONFDIR -name m*$1*| xargs -n 1 basename |cut -c2-`
+  eval $proffind
+}
 findcurrent () {
 mcurr="None"
 for f in `ls -1 $CONFDIR/m*` ; do  if cmp -s /etc/mmdvmhost $f; then  mcurr=`basename $f`; fi ; done
@@ -32,18 +36,26 @@ usage () {
  echo "      -s profile  replace mmdvmhost"
  echo "      -t   as yet unspecified test"
  echo "      -v   version"
- echo "      -X profile  copy current mmdvmhost etc to configs/profile"
+ echo "      -X profile   copy current mmdvmhost etc to configs/profile"
  echo "      -O  option to -X to confirm overwrite"
  echo ""
+ echo "   profile stored as Xn-YYYY"
+ echo "       X - internal value based on config ie m - mmdvmhost d - dstargateway y - ysfgateway ..."
+ echo "       n - user supplied profile number e.g. 0"
+ echo "       YYYY - user supplied short name"
+ echo " TIDY UP syntax of X and s ie   X needs  0-ipsc to create m0-ipsc s just needs 0 or ipsc"
+
+ echo "      profile field will search for  n or YYYY or n-YYYY"
+ echo "files stored as '$CONFDIR'/m0-xxxx"
  echo ""
- echo "expects files to be in '$CONFDIR'/m0-xxxx"
- echo ""
- echo "Example: $(basename $0) -X m3-dmrg"
- echo "Will copy current mmdvmhost, dmrgateway, ...  into configs folder as m3-dmrg, dm3-dmrg"
+ echo "Example: $(basename $0) -X 3-bmes"
+ echo "Will copy current mmdvmhost, dmrgateway, ...  into configs folder as m3-dmrg, d3-dmrg"
  echo " If this profile already exists use append -O to confirm overwriting"
  echo ""
- echo " $(basename $0) -s m1-ipsc"
- echo "Will copy profile m1-ipsc, dm1-ipsc to  mmdvmhost, dmrgateway, ... and restart"
+ echo " $(basename $0) -s 0 or"
+ echo " $(basename $0) -s ipsc or"
+ echo " $(basename $0) -s 0-ipsc"
+ echo "Will copy profile m0-ipsc, d0-ipsc to  mmdvmhost, dmrgateway, ... and restart"
 
  exit 0
 }
@@ -66,7 +78,7 @@ if [ "$1" != "" ]; then
      i ) outinfo=0 ;;
      h ) usage ;;
      l ) outlist=0 ;;
-     s ) profile="$OPTARG" ; oswitch=0 ;;
+     s ) proftest="$OPTARG" ; oswitch=0 ;;
      l ) outlist=0 ;;
      t ) outtest=0 ;;
      v ) version ; exit 0 ;;
@@ -92,16 +104,20 @@ if [  -n "$outinfo" ]; then
 fi
 
 if [  -n "$outlist" ]; then
+  # expand later to handle ircddbgateway rather than mmdvmhost
   ls -1 $CONFDIR/m* | xargs -n 1 basename
 fi
 
 if [  -n "$oswitch" ]; then
   echo "switching"
- if [ ! -f $CONFDIR/$profile ]; then
+  profile=findprof $proftest
+  if [ $profile == "" ]; then profile="None" ; fi
+  echo $profile
+ if [ ! -f $CONFDIR/m$profile ]; then
    echo "profile: $profile not found"
    exit 0
  else
-   mnext=`basename $CONFDIR/$profile`
+   mnext=`basename $CONFDIR/m$profile`
  fi
  if [ $mnext = "$mcurr" ]; then
    echo " same as current profile $mcurr:$mnext "
@@ -112,27 +128,49 @@ if [  -n "$oswitch" ]; then
  #sudo systemctl stop pistar-watchdog.service > /dev/null 2>/dev/null
  sleep 1
  sudo mount -o remount,rw /
- sudo cp  $CONFDIR/$profile /etc/mmdvmhost
+ sudo cp  $CONFDIR/m$profile /etc/mmdvmhost
  sudo cp  $CONFDIR/d$profile /etc/dmrgateway
+ sudo cp  $CONFDIR/y$profile /etc/dmrgateway
+ sudo cp  $CONFDIR/p$profile /etc/p25gateway
+ sudo cp  $CONFDIR/n$profile /etc/nxdngateway
+ sudo cp  $CONFDIR/yd$profile /etc/ysf2dmr
+ sudo cp  $CONFDIR/dy$profile /etc/dmr2ysf
  sleep 1
- sudo mount -o remount,ro /
- sleep 1
- sudo systemctl restart mmdvmhost.service > /dev/null 2>/dev/null
- sudo systemctl restart dmrgateway.service > /dev/null 2>/dev/null
- sudo systemctl restart pistar-watchdog.service > /dev/null 2>/dev/null
- sudo mount -o remount,ro /
+ sudo systemctl restart mmdvmhost.service > /dev/null 2>/dev/null &
+ sudo systemctl restart dmrgateway.service > /dev/null 2>/dev/null &
+ sudo systemctl restart pistar-watchdog.service > /dev/null 2>/dev/null &
+ sudo systemctl start ysf2dmr.service > /dev/null 2>/dev/null &
+ sudo systemctl start ysfgateway.service > /dev/null 2>/dev/null &
+ sudo systemctl start ysfparrot.service > /dev/null 2>/dev/null &
+ sudo systemctl start p25gateway.service > /dev/null 2>/dev/null &
+ sudo systemctl start p25parrot.service > /dev/null 2>/dev/null &
+ sudo systemctl start nxdngateway.service > /dev/null 2>/dev/null &
+ sudo systemctl start nxdnparrot.service > /dev/null 2>/dev/null &
+ sudo systemctl start dmr2ysf.service > /dev/null 2>/dev/null &
+ sudo systemctl start dmr2nxdn.service > /dev/null 2>/dev/null &
+ sudo systemctl start dapnetgateway.service > /dev/null 2>/dev/null &
+
+#let cron take care of the ro
+# sudo mount -o remount,ro /
  sleep 1
 fi
 
 if [  -n "$ocreate" ]; then
   createdir
-  if [  -f $CONFDIR/$profile ] && [ "$overwrite" != "1" ] ; then
+  if [  -f $CONFDIR/m$profile ] && [ "$overwrite" != "1" ] ; then
     echo "profile: $profile exists specify overwrite -O"
   else
    sleep 1
+# arbitrary collection of configs
    sudo mount -o remount,rw /
-   cp /etc/mmdvmhost  $CONFDIR/$profile
+   cp /etc/mmdvmhost  $CONFDIR/m$profile
    cp /etc/dmrgateway  $CONFDIR/d$profile
+   cp /etc/ysfgateway  $CONFDIR/y$profile
+   cp /etc/p25gateway  $CONFDIR/p$profile
+   cp /etc/nxdngateway  $CONFDIR/n$profile
+   cp /etc/ysf2dmr  $CONFDIR/yd$profile
+   cp /etc/dmr2ysf  $CONFDIR/dy$profile
+
    sleep 1
    sudo mount -o remount,ro /
   fi

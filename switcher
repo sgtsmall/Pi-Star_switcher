@@ -2,11 +2,15 @@
 #Routine to check or relink a config file
 
 CONFDIR=/home/pi-star/configs
-
+VERSION="0.9.4 11Nov18"
 version () {
- echo "Version: $(basename $0) 0.9.3 09Nov18"
+ msg="Version: $(basename $0) $VERSION"
+ returnmsg
+ exit 0
 }
-
+returnmsg () {
+  echo $msg
+}
 createdir () {
  if [ ! -d $CONFDIR ] ; then
   sleep 1
@@ -82,7 +86,7 @@ if [ "$1" != "" ]; then
      s ) proftest="$OPTARG" ; oswitch=0 ;;
      l ) outlist=0 ;;
      t ) outtest=0 ;;
-     v ) version ; exit 0 ;;
+     v ) version ;;
      X ) profile="$OPTARG" ; ocreate=0 ;;
      O ) overwrite=1 ;;
     \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
@@ -101,27 +105,33 @@ else
 fi
 
 if [  -n "$outinfo" ]; then
-  echo $mcurr
+  msg=$mcurr
+  returnmsg
+  exit 0
 fi
 
 if [  -n "$outlist" ]; then
   # expand later to handle ircddbgateway rather than mmdvmhost
-  find $CONFDIR -name m*$1*| xargs -n 1 basename |cut -c2-
+  msg=`find $CONFDIR -name m*$1*| xargs -n 1 basename |cut -c2- | sort | xargs`
+  returnmsg
+  exit 0
 fi
 
 if [  -n "$oswitch" ]; then
-  echo "switching"
+  msg="switching"
   profile=$(findprof $proftest)
   if [ -z $profile ]; then profile="None" ; fi
-  echo $profile
+  msg="$msg $profile"
  if [ ! -f $CONFDIR/m$profile ]; then
-   echo "profile: $profile not found"
+   msg="$msg profile: $profile not found"
+   returnmsg
    exit 0
  else
    mnext=`basename $CONFDIR/m$profile`
  fi
  if [ $mnext = "$mcurr" ]; then
-   echo " same as current profile $mcurr:$mnext "
+   msg="$msg same as current profile $mcurr:$mnext "
+   returnmsg
    exit 0
  fi
  #sudo systemctl stop mmdvmhost.service > /dev/null 2>/dev/null
@@ -159,7 +169,9 @@ fi
 if [  -n "$ocreate" ]; then
   createdir
   if [  -f $CONFDIR/m$profile ] && [ "$overwrite" != "1" ] ; then
-    echo "profile: $mprofile exists specify overwrite -O"
+    msg="profile: $mprofile exists specify overwrite -O"
+    returnmsg
+    exit 1
   else
    sleep 1
 # arbitrary collection of configs

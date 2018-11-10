@@ -1,0 +1,17 @@
+/etc/ircddbgateway
+/etc/mmdvmhost
+/etc/dstarrepeater
+/etc/dapnetgateway
+/etc/p25gateway
+/etc/ysfgateway
+/etc/nxdngateway
+/etc/ysf2dmr
+/etc/ysf2nxd
+/etc/ysf2p25
+/etc/dmr2ysf
+/etc/dmr2nxdn
+/etc/dmrgateway
+/etc/starnetserver
+/etc/timeserver
+/etc/dstar-radio.*
+/etc/pistar-remote

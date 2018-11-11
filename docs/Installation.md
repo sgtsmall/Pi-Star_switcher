@@ -19,6 +19,14 @@ https://github.com/on7lds/NextionDriver
 
 https://github.com/on7lds/NextionDriverInstaller
 
+* start with clean img
+* copy wpa_supplicant to boot and reboot
+* Pi-star setup hostname callsign location apply then update
+* NextionDriver Install
+* plug in display and continue setup
+* Install Pi-star switcher
+
+
 
 ### Pi-Star - raspi
 

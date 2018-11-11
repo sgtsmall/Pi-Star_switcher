@@ -57,7 +57,10 @@ Usage: switcher [ -i|-l|-s profile|-X profile [-O]]
        TIDY UP syntax of X and s ie   X needs  0-ipsc to create m0-ipsc s just needs 0 or ipsc
 
             profile field will search for  n or YYYY or n-YYYY
-      files stored as '$CONFDIR'/m0-xxxx
+      files stored as '$CONFDIR'/$profile/m0-xxxx and a tar file
+
+      /home/pi-star/configs/0-ipsc/0-ipsc.tgz  and
+      /home/pi-star/configs/0-ipsc/m0-ipsc (copy of mmdvmhost for quick comapre)
 
       Example: $(basename $0) -X 3-bmes
       Will copy current mmdvmhost, dmrgateway, ...  into configs folder as m3-dmrg, d3-dmrg

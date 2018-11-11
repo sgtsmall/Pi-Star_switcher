@@ -6,12 +6,12 @@
 /etc/ysfgateway
 /etc/nxdngateway
 /etc/ysf2dmr
-/etc/ysf2nxd
+/etc/ysf2nxdn
 /etc/ysf2p25
 /etc/dmr2ysf
 /etc/dmr2nxdn
 /etc/dmrgateway
 /etc/starnetserver
 /etc/timeserver
-/etc/dstar-radio.*
+/etc/dstar-radio.mmdvmhost
 /etc/pistar-remote

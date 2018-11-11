@@ -28,7 +28,7 @@ findprof () {
 }
 findcurrent () {
 mcurr="None"
-for f in `ls -1 $CONFDIR/m*` ; do  if cmp -s /etc/mmdvmhost $f; then  mcurr=`basename $f|cut -c2-`; fi ; done
+for f in `find $CONFDIR/ -name m*$1*` ; do  if cmp -s /etc/mmdvmhost $f; then  mcurr=`basename $f|cut -c2-`; fi ; done
 #mcurr=`readlink /etc/mmdvmhost | xargs -n 1 basename`
 }
 
@@ -112,7 +112,7 @@ fi
 
 if [  -n "$outlist" ]; then
   # expand later to handle ircddbgateway rather than mmdvmhost
-  msg=`find $CONFDIR -name m*$1*| xargs -n 1 basename |cut -c2- | sort | xargs`
+  msg=`find $CONFDIR/* -name m*$1*| xargs -n 1 basename |cut -c2- | sort | xargs`
   returnmsg
   exit 0
 fi
@@ -122,53 +122,47 @@ if [  -n "$oswitch" ]; then
   profile=$(findprof $proftest)
   if [ -z $profile ]; then profile="None" ; fi
   msg="$msg $profile"
- if [ ! -f $CONFDIR/m$profile ]; then
+ if [ ! -f $CONFDIR/$profile/m$profile ]; then
    msg="$msg profile: $profile not found"
    returnmsg
    exit 0
  else
-   mnext=`basename $CONFDIR/m$profile`
+   mnext=`basename $CONFDIR/$profile/m$profile`
  fi
- if [ $mnext = "$mcurr" ]; then
+ if [ $mnext = "m$mcurr" ]; then
    msg="$msg same as current profile $mcurr:$mnext "
    returnmsg
    exit 0
  fi
- #sudo systemctl stop mmdvmhost.service > /dev/null 2>/dev/null
- #sudo systemctl stop dmrgateway.service > /dev/null 2>/dev/null
- #sudo systemctl stop pistar-watchdog.service > /dev/null 2>/dev/null
+ # this is probably still not the best to handle potential overlap of restarts
+ sudo systemctl stop cron.service > /dev/null 2>/dev/null &
  sleep 1
  sudo mount -o remount,rw /
- sudo cp  $CONFDIR/m$profile /etc/mmdvmhost
- sudo cp  $CONFDIR/d$profile /etc/dmrgateway
- sudo cp  $CONFDIR/y$profile /etc/ysfgateway
- sudo cp  $CONFDIR/p$profile /etc/p25gateway
- sudo cp  $CONFDIR/n$profile /etc/nxdngateway
- sudo cp  $CONFDIR/yd$profile /etc/ysf2dmr
- sudo cp  $CONFDIR/dy$profile /etc/dmr2ysf
+ sudo tar -xPzf $CONFDIR/$profile/$profile.tgz
  sleep 1
  sudo systemctl restart mmdvmhost.service > /dev/null 2>/dev/null &
  sudo systemctl restart dmrgateway.service > /dev/null 2>/dev/null &
  sudo systemctl restart pistar-watchdog.service > /dev/null 2>/dev/null &
- sudo systemctl start ysf2dmr.service > /dev/null 2>/dev/null &
- sudo systemctl start ysfgateway.service > /dev/null 2>/dev/null &
- sudo systemctl start ysfparrot.service > /dev/null 2>/dev/null &
- sudo systemctl start p25gateway.service > /dev/null 2>/dev/null &
- sudo systemctl start p25parrot.service > /dev/null 2>/dev/null &
- sudo systemctl start nxdngateway.service > /dev/null 2>/dev/null &
- sudo systemctl start nxdnparrot.service > /dev/null 2>/dev/null &
- sudo systemctl start dmr2ysf.service > /dev/null 2>/dev/null &
- sudo systemctl start dmr2nxdn.service > /dev/null 2>/dev/null &
- sudo systemctl start dapnetgateway.service > /dev/null 2>/dev/null &
+ sudo systemctl restart ysf2dmr.service > /dev/null 2>/dev/null &
+ sudo systemctl restart ysfgateway.service > /dev/null 2>/dev/null &
+ sudo systemctl restart ysfparrot.service > /dev/null 2>/dev/null &
+ sudo systemctl restart p25gateway.service > /dev/null 2>/dev/null &
+ sudo systemctl restart p25parrot.service > /dev/null 2>/dev/null &
+ sudo systemctl restart nxdngateway.service > /dev/null 2>/dev/null &
+ sudo systemctl restart nxdnparrot.service > /dev/null 2>/dev/null &
+ sudo systemctl restart dmr2ysf.service > /dev/null 2>/dev/null &
+ sudo systemctl restart dmr2nxdn.service > /dev/null 2>/dev/null &
+ sudo systemctl restart dapnetgateway.service > /dev/null 2>/dev/null &
 
 #let cron take care of the ro
 # sudo mount -o remount,ro /
- sleep 1
+ sleep 2
+ sudo systemctl start cron.service > /dev/null 2>/dev/null &
 fi
 
 if [  -n "$ocreate" ]; then
   createdir
-  if [  -f $CONFDIR/m$profile ] && [ "$overwrite" != "1" ] ; then
+  if [  -f $CONFDIR/$profile/m$profile ] && [ "$overwrite" != "1" ] ; then
     msg="profile: $mprofile exists specify overwrite -O"
     returnmsg
     exit 1
@@ -176,13 +170,11 @@ if [  -n "$ocreate" ]; then
    sleep 1
 # arbitrary collection of configs
    sudo mount -o remount,rw /
-   cp /etc/mmdvmhost  $CONFDIR/m$profile
-   cp /etc/dmrgateway  $CONFDIR/d$profile
-   cp /etc/ysfgateway  $CONFDIR/y$profile
-   cp /etc/p25gateway  $CONFDIR/p$profile
-   cp /etc/nxdngateway  $CONFDIR/n$profile
-   cp /etc/ysf2dmr  $CONFDIR/yd$profile
-   cp /etc/dmr2ysf  $CONFDIR/dy$profile
+   if [ ! -d $CONFDIR/$profile ] ; then
+    mkdir $CONFDIR/$profile
+  fi
+   cp /etc/mmdvmhost  $CONFDIR/$profile/m$profile
+   tar -cxPT $CONFDIR/MMDVM.conflist -f $CONFDIR/$profile/$profile.tgz
 
    sleep 1
    sudo mount -o remount,ro /

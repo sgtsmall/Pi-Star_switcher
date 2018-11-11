@@ -174,7 +174,7 @@ if [  -n "$ocreate" ]; then
     mkdir $CONFDIR/$profile
   fi
    cp /etc/mmdvmhost  $CONFDIR/$profile/m$profile
-   tar -cxPT $CONFDIR/MMDVM.conflist -f $CONFDIR/$profile/$profile.tgz
+   tar -cPT $CONFDIR/MMDVM.conflist -f $CONFDIR/$profile/$profile.tgz
 
    sleep 1
    sudo mount -o remount,ro /

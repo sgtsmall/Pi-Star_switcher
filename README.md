@@ -4,7 +4,7 @@ Originally developed to support Nextion touch screen change.
 Lots to do
 Relies on functionality of NextionDriver by ON7LDS
 
-0.9.4 11Nov18
+0.9.5rc1 11Nov18
 
 ## HotSpots supported - Local Testing
 

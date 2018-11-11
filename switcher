@@ -2,7 +2,7 @@
 #Routine to check or relink a config file
 
 CONFDIR=/home/pi-star/configs
-VERSION="0.9.4 11Nov18"
+VERSION="0.9.5rc1 11Nov18"
 version () {
  msg="Version: $(basename $0) $VERSION"
  returnmsg
@@ -161,6 +161,9 @@ if [  -n "$oswitch" ]; then
 # sudo mount -o remount,ro /
  sleep 2
  sudo systemctl start cron.service > /dev/null 2>/dev/null &
+ returnmsg
+ exit 0
+
 fi
 
 if [  -n "$ocreate" ]; then
@@ -177,7 +180,7 @@ if [  -n "$ocreate" ]; then
     mkdir $CONFDIR/$profile
   fi
    cp /etc/mmdvmhost  $CONFDIR/$profile/m$profile
-   tar -cPT $CONFDIR/MMDVM.conflist -f $CONFDIR/$profile/$profile.tgz
+   tar -czPT $CONFDIR/MMDVM.conflist -f $CONFDIR/$profile/$profile.tgz
 
    sleep 1
    sudo mount -o remount,ro /

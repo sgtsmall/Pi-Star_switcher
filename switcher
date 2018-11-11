@@ -135,7 +135,10 @@ if [  -n "$oswitch" ]; then
    exit 0
  fi
  # this is probably still not the best to handle potential overlap of restarts
- sudo systemctl stop cron.service > /dev/null 2>/dev/null &
+ sudo systemctl stop cron.service > /dev/null 2>/dev/null
+ sudo systemctl stop mmdvmhost.service > /dev/null 2>/dev/null
+ sudo systemctl stop dmrgateway.service > /dev/null 2>/dev/null
+# wait for these to stop or the restore will fail if busy
  sleep 1
  sudo mount -o remount,rw /
  sudo tar -xPzf $CONFDIR/$profile/$profile.tgz

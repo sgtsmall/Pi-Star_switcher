@@ -135,15 +135,12 @@ if [  -n "$oswitch" ]; then
    exit 0
  fi
  # this is probably still not the best to handle potential overlap of restarts
- sudo systemctl stop cron.service > /dev/null 2>/dev/null
- sudo systemctl stop mmdvmhost.service > /dev/null 2>/dev/null
- sudo systemctl stop dmrgateway.service > /dev/null 2>/dev/null
-# wait for these to stop or the restore will fail if busy
- sleep 1
+ # wait for these to stop or the restore will fail if busy
+ returnmsg
+ sleep 2
  sudo mount -o remount,rw /
  sudo tar -xPzf $CONFDIR/$profile/$profile.tgz
  sleep 1
- sudo systemctl restart mmdvmhost.service > /dev/null 2>/dev/null &
  sudo systemctl restart dmrgateway.service > /dev/null 2>/dev/null &
  sudo systemctl restart pistar-watchdog.service > /dev/null 2>/dev/null &
  sudo systemctl restart ysf2dmr.service > /dev/null 2>/dev/null &
@@ -156,14 +153,11 @@ if [  -n "$oswitch" ]; then
  sudo systemctl restart dmr2ysf.service > /dev/null 2>/dev/null &
  sudo systemctl restart dmr2nxdn.service > /dev/null 2>/dev/null &
  sudo systemctl restart dapnetgateway.service > /dev/null 2>/dev/null &
-
+ sudo systemctl start cron.service > /dev/null 2>/dev/null &
+ sudo systemctl restart mmdvmhost.service > /dev/null 2>/dev/null &
+# as soon as mmdvmhost restarts the Nextion will disconnect
 #let cron take care of the ro
 # sudo mount -o remount,ro /
- sleep 2
- sudo systemctl start cron.service > /dev/null 2>/dev/null &
- returnmsg
- sleep 2
- exit 0
 
 fi
 

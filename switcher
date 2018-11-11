@@ -162,6 +162,7 @@ if [  -n "$oswitch" ]; then
  sleep 2
  sudo systemctl start cron.service > /dev/null 2>/dev/null &
  returnmsg
+ sleep 2
  exit 0
 
 fi

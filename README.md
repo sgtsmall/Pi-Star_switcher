@@ -4,9 +4,9 @@ Originally developed to support Nextion touch screen change.
 Lots to do
 Relies on functionality of NextionDriver by ON7LDS
 
-0.9.5rc1 11Nov18
+0.9.6rc2 13Nov18
 
-## HotSpots supported - Local Testing
+## HotSpots tested
 
 * Raspi
   * "JumboSpot"
@@ -16,13 +16,14 @@ Relies on functionality of NextionDriver by ON7LDS
 * Nano
 
 
-## Screens supported
+## Screens tested
 
 * Basic
   * 400x320 3.2
 
 * Enhanced
   * 400x320 3.2
+
 
 ## Additional Features
 
@@ -62,14 +63,14 @@ Usage: switcher [ -i|-l|-s profile|-X profile [-O]]
       /home/pi-star/configs/0-ipsc/0-ipsc.tgz  and
       /home/pi-star/configs/0-ipsc/m0-ipsc (copy of mmdvmhost for quick comapre)
 
-      Example: $(basename $0) -X 3-bmes
-      Will copy current mmdvmhost, dmrgateway, ...  into configs folder as m3-dmrg, d3-dmrg
+      Example: $(basename $0) -X 2-bmei
+      Will copy current mmdvmhost, dmrgateway, ...  into configs folder as 2-bmei
        If this profile already exists use append -O to confirm overwriting
 
        $(basename $0) -s 0 or
        $(basename $0) -s ipsc or
        $(basename $0) -s 0-ipsc
-      Will copy profile m0-ipsc, d0-ipsc to  mmdvmhost, dmrgateway, ... and restart
+      Will restore thefiles from the stored profile ... and restart
 ```
 
 There will be lots of documentation here: https://github.com/sgtsmall/Pi-Star_switcher/tree/master/docs (oneday)

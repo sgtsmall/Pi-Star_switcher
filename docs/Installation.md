@@ -25,7 +25,7 @@ https://github.com/on7lds/NextionDriverInstaller
 * NextionDriver Install
 * plug in display and continue setup
 * Install Pi-star switcher
-
+* extra notes here about nextion.py later
 
 
 ### Pi-Star - raspi

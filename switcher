@@ -2,7 +2,7 @@
 #Routine to check or relink a config file
 
 CONFDIR=/home/pi-star/configs
-VERSION="0.9.5rc1 11Nov18"
+VERSION="0.9.6rc2 12Nov18"
 version () {
  msg="Version: $(basename $0) $VERSION"
  returnmsg

@@ -5,6 +5,11 @@ https://github.com/g4klx/MMDVMHost.git
 I haven't found where/if they are installed in zPi-Star images...
 for now I have just dragged them into here to support my switching I will find a better way to get them from the source.
 
+```
+sudo apt-get install python-serial
+```
+more work required here will need a script to shutdown mmdvmhost and watchdog whilst loading the file.
+
 
 # Update Nextion Displays from the Command Line
 

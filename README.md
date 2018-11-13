@@ -4,7 +4,7 @@ Originally developed to support Nextion touch screen change.
 Lots to do
 Relies on functionality of NextionDriver by ON7LDS
 
-0.9.6rc2 13Nov18
+0.9.7rc3 14Nov18
 
 ## HotSpots tested
 
@@ -29,8 +29,9 @@ Relies on functionality of NextionDriver by ON7LDS
 
 switcher also has additional features not found in other better programs!.
 
-* Something
-* Something else
+* added script swstopstart to stop and start and restart services. don't run stop from Nextion
+* Folder Nextion contains a sample tft
+* it also has the nextion.py function to try and load the tft to the screen
 * and a set of steak knives
 * ok so not realy that last bit.
 
@@ -72,6 +73,28 @@ Usage: switcher [ -i|-l|-s profile|-X profile [-O]]
        $(basename $0) -s 0-ipsc
       Will restore thefiles from the stored profile ... and restart
 ```
+
+```
+Usage: swstopstart [stop|start|restart]
+
+      stop  stop pistar mmdvm services
+      start start pistar services
+      restart   converts start to restart of pistar services
+
+```
+This can be used with the nextion.py function
+e.g.
+
+```
+cd Nextion
+swstopstart stop
+python nextion.py SwitcherD_32_Enhanced.txt /dev/USB0
+swstopstart start
+```
+
+
+
+
 
 There will be lots of documentation here: https://github.com/sgtsmall/Pi-Star_switcher/tree/master/docs (oneday)
 

@@ -1,0 +1,59 @@
+#!/bin/bash
+#Routine to stop or start services
+#
+# Quick version may get tidyer later
+#
+# DO NOT RUN via Nextion .. the stop of mmdvmhost will stop NExtionDriver killing the job
+#
+PISTUPDATE=/usr/local/sbin/pistar-update
+VERSION="0.1.0rc1 14Nov18"
+version () {
+ msg="Version: $(basename $0) $VERSION"
+ returnmsg
+ exit 0
+}
+returnmsg () {
+  echo $msg
+}
+
+usage () {
+ echo "Usage: $(basename $0) [stop|start]"
+ echo ""
+ echo "      stop  stop pistar mmdvm services"
+ echo "      start start pistar services"
+ echo "      restart   converts start to restart of pistar services"
+ echo ""
+}
+
+test -r $PISTUPDATE || exit 1
+
+case $1 in
+
+  stop)
+    sudo mount -o remount,rw /
+    grep 'systemctl stop' $PISTUPDATE  > /tmp/stoplist
+    sudo sh /tmp/stoplist &
+    exit 0
+    ;;
+
+  start)
+    sudo mount -o remount,rw /
+    grep 'systemctl start' $PISTUPDATE  > /tmp/startlist
+    sudo sh /tmp/startlist &
+    exit 0
+    ;;
+
+  restart)
+    sudo mount -o remount,rw /
+    grep 'systemctl start' $PISTUPDATE | sed 's/ start/ restart/' > /tmp/restartlist
+    sudo sh /tmp/restartlist &
+    exit 0
+    ;;
+
+
+  *)
+    usage
+    exit 1
+esac
+
+# cron can take care of the readonly

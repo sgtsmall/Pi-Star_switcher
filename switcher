@@ -2,7 +2,7 @@
 #Routine to check or relink a config file
 
 CONFDIR=/home/pi-star/configs
-VERSION="0.9.6rc2 12Nov18"
+VERSION="0.9.7rc3 14Nov18"
 version () {
  msg="Version: $(basename $0) $VERSION"
  returnmsg
@@ -141,20 +141,7 @@ if [  -n "$oswitch" ]; then
  sudo mount -o remount,rw /
  sudo tar -xPzf $CONFDIR/$profile/$profile.tgz
  sleep 1
- sudo systemctl restart dmrgateway.service > /dev/null 2>/dev/null &
- sudo systemctl restart pistar-watchdog.service > /dev/null 2>/dev/null &
- sudo systemctl restart ysf2dmr.service > /dev/null 2>/dev/null &
- sudo systemctl restart ysfgateway.service > /dev/null 2>/dev/null &
- sudo systemctl restart ysfparrot.service > /dev/null 2>/dev/null &
- sudo systemctl restart p25gateway.service > /dev/null 2>/dev/null &
- sudo systemctl restart p25parrot.service > /dev/null 2>/dev/null &
- sudo systemctl restart nxdngateway.service > /dev/null 2>/dev/null &
- sudo systemctl restart nxdnparrot.service > /dev/null 2>/dev/null &
- sudo systemctl restart dmr2ysf.service > /dev/null 2>/dev/null &
- sudo systemctl restart dmr2nxdn.service > /dev/null 2>/dev/null &
- sudo systemctl restart dapnetgateway.service > /dev/null 2>/dev/null &
- sudo systemctl start cron.service > /dev/null 2>/dev/null &
- sudo systemctl restart mmdvmhost.service > /dev/null 2>/dev/null &
+ swstopstart restart
 # as soon as mmdvmhost restarts the Nextion will disconnect
 #let cron take care of the ro
 # sudo mount -o remount,ro /

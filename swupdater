@@ -25,6 +25,7 @@ usage () {
  echo ""
  echo "      -O  Confirm run update"
  echo "      -h  This help text"
+ echo "      -v  version"
  echo ""
  echo "initiates a backgrounded update of the switcher software from git"
 }
@@ -34,7 +35,7 @@ test -r $PISTUPDATE || exit 1
 
 overwrite=
 # for future state with multiple options
-while getopts "ihlOs:tvX:" opt ; do
+while getopts "hOv" opt ; do
   case $opt in
 
     h ) usage ;;

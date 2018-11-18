@@ -4,7 +4,7 @@ Originally developed to support Nextion touch screen change.
 Lots to do
 Relies on functionality of NextionDriver by ON7LDS
 
-0.9.8rc4 19Nov18
+0.9.9rc5 19Nov18
 
 ## HotSpots tested
 
@@ -52,6 +52,9 @@ Usage: switcher [ -i|-l|-s profile|-X profile [-O]]
       -v   version
       -X profile  copy current mmdvmhost etc to configs/profile
       -O  option to -X to confirm overwrite
+
+      -U -O  update switcher from git requires -O as confirmation
+
          profile stored as Xn-YYYY
              X - internal value based on config ie m - mmdvmhost d - dstargateway y - ysfgateway ...
              n - user supplied profile number e.g. 0

@@ -2,7 +2,7 @@
 #Routine to check or relink a config file
 
 CONFDIR=/home/pi-star/configs
-VERSION="0.9.8rc4 19Nov18"
+VERSION="0.9.9rc5 19Nov18"
 version () {
  msg="Version: $(basename $0) $VERSION"
  returnmsg
@@ -33,7 +33,7 @@ for f in `find $CONFDIR/ -name m*$1*` ; do  if cmp -s /etc/mmdvmhost $f; then  m
 }
 
 usage () {
- echo "Usage: $(basename $0) [ -i|-l|-s profile|-X profile [-O]]"
+ echo "Usage: $(basename $0) [ -i|-l|-s profile|-X profile [-O]| -U -O]"
  echo ""
  echo "      -i  return current matched profile"
  echo "      -h  This help text"
@@ -44,6 +44,7 @@ usage () {
  echo "      -X profile   copy current mmdvmhost etc to configs/profile"
  echo "      -O  option to -X to confirm overwrite"
  echo ""
+ echo "      -U -O  update switcher from git requires -O as confirmation"
  echo "   profile stored as Xn-YYYY"
  echo "       X - internal value based on config ie m - mmdvmhost d - dstargateway y - ysfgateway ..."
  echo "       n - user supplied profile number e.g. 0"
@@ -74,10 +75,10 @@ if [ "$1" != "" ]; then
  oswitch=
  outtest=
  ocreate=
-
+ oupdate=
 
  # for future state with multiple options
- while getopts "ihlOs:tvX:" opt ; do
+ while getopts "ihlOUs:tvX:" opt ; do
    case $opt in
 
      i ) outinfo=0 ;;
@@ -89,6 +90,8 @@ if [ "$1" != "" ]; then
      v ) version ;;
      X ) profile="$OPTARG" ; ocreate=0 ;;
      O ) overwrite=1 ;;
+     U ) oupdate=1 ;;
+
     \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
    esac
  done
@@ -166,5 +169,17 @@ if [  -n "$ocreate" ]; then
 
    sleep 1
    sudo mount -o remount,ro /
+  fi
+fi
+if [  -n "$oupdate" ]; then
+  if [ "$overwrite" != "1" ] ; then
+    msg="swupdate: to confirm specify overwrite -O"
+    returnmsg
+    exit 1
+  else
+   sleep 1
+   swupdate -O &
+   sleep 2
+   exit 0
   fi
 fi

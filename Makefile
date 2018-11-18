@@ -2,7 +2,7 @@
 # Makefile for local scripts
 #
 
-APPS := switcher
+APPS := switcher swstopstart swupdater
 
 all : $(APPS)
 
@@ -23,6 +23,7 @@ install : $(APPS)
 
 	$(INSTALL) switcher $(INSTALLDIR)/sbin
 	$(INSTALL) swstopstart $(INSTALLDIR)/sbin
+	$(INSTALL) swupdater $(INSTALLDIR)/sbin
 #	$(INSTALL) -m 644 switcher.service $(SSERVICEDIR)
 #	$(INSTALL) switcher.initd /etc/init.d/switcher
 #	systemctl daemon-reload

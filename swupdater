@@ -1,0 +1,57 @@
+#!/bin/bash
+#Routine to update switcher
+#
+# Quick version may get tidyer later
+#
+# DO NOT RUN via Nextion .. the stop of mmdvmhost will stop NExtionDriver killing the job
+#
+
+HOMEDIR=/home/pi-star
+CONFDIR=/home/pi-star/configs
+GITHOME=$HOME/Pi-Star_switcher
+PISTUPDATE=/usr/local/sbin/pistar-update
+VERSION="0.1.0rc1 19Nov18"
+version () {
+ msg="Version: $(basename $0) $VERSION"
+ returnmsg
+ exit 0
+}
+returnmsg () {
+  echo $msg
+}
+
+usage () {
+ echo "Usage: $(basename $0) [-O]"
+ echo ""
+ echo "      -O  Confirm run update"
+ echo "      -h  This help text"
+ echo ""
+ echo "initiates a backgrounded update of the switcher software from git"
+}
+
+test -r $GITHOME || exit 1
+test -r $PISTUPDATE || exit 1
+
+overwrite=
+# for future state with multiple options
+while getopts "ihlOs:tvX:" opt ; do
+  case $opt in
+
+    h ) usage ;;
+    v ) version ;;
+    O ) overwrite=1 ;;
+   \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
+  esac
+done
+shift $(($OPTIND -1))
+#  $* is left over
+if [ -n "$overwrite" ] ; then
+  sudo mount -o remount,rw /
+  sleep 2
+  cd $GITHOME
+  git pull origin master
+  sleep 2
+  sudo make install
+  sleep 1
+  exit 0
+fi

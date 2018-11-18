@@ -178,7 +178,8 @@ if [  -n "$oupdate" ]; then
     exit 1
   else
    sleep 1
-   swupdater -O &
+   msg="`swupdater -O`"
+   returnmsg
    sleep 2
    exit 0
   fi

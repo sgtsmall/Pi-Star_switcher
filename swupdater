@@ -10,7 +10,7 @@ HOMEDIR=/home/pi-star
 CONFDIR=/home/pi-star/configs
 GITHOME=$HOME/Pi-Star_switcher
 PISTUPDATE=/usr/local/sbin/pistar-update
-VERSION="0.1.0rc1 19Nov18"
+VERSION="0.1.1rc2 19Nov18"
 version () {
  msg="Version: $(basename $0) $VERSION"
  returnmsg

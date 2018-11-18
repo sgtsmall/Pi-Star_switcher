@@ -178,7 +178,7 @@ if [  -n "$oupdate" ]; then
     exit 1
   else
    sleep 1
-   swupdate -O &
+   swupdater -O &
    sleep 2
    exit 0
   fi

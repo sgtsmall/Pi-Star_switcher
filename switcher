@@ -177,10 +177,12 @@ if [  -n "$oupdate" ]; then
     returnmsg
     exit 1
   else
-   sleep 1
-   msg="`swupdater -O`"
-   returnmsg
-   sleep 2
-   exit 0
+    sleep 1
+    msg="`swgitstatus`"
+    returnmsg
+    sleep 2
+    launcher=`swupdater -O &`
+    sleep 5
+    exit 0
   fi
 fi

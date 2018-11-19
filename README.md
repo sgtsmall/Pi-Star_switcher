@@ -103,6 +103,7 @@ There will be lots of documentation here: https://github.com/sgtsmall/Pi-Star_sw
 
 ## Support
 
+
 ideas and questions can be handled on the https://vk2bv.org website soon
 
 ## Videos

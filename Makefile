@@ -1,6 +1,6 @@
 #
 # Makefile for local scripts
-#
+# 
 
 APPS := switcher swstopstart swupdater swgitstatus
 INSTALLDIR := /usr/local

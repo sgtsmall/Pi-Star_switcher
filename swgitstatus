@@ -8,7 +8,7 @@
 
 HOMEDIR=/home/pi-star
 CONFDIR=/home/pi-star/configs
-GITHOME=$HOME/Pi-Star_switcher
+GITHOME=$HOMEDIR/Pi-Star_switcher
 PISTUPDATE=/usr/local/sbin/pistar-update
 VERSION="0.1.1rc2 19Nov18"
 version () {

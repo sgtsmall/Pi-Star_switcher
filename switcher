@@ -178,10 +178,10 @@ if [  -n "$oupdate" ]; then
     exit 1
   else
     sleep 1
-    msg="`swgitstatus`"
+    msg="`su -u pi-star swgitstatus`"
     returnmsg
     sleep 2
-    launcher=`swupdater -O &`
+    launcher=`su -u pi-star swupdater -O &`
     sleep 5
     exit 0
   fi

@@ -1,6 +1,6 @@
 #
 # Makefile for local scripts
-# 
+#
 
 APPS := switcher swstopstart swupdater swgitstatus
 INSTALLDIR := /usr/local
@@ -38,4 +38,4 @@ depend : $(wildcard *.c)
 #
 # The following is updated by "make depend"
 #
-# DO NOT DELETE
+# DO NOT DELETE 

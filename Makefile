@@ -9,10 +9,10 @@ INSTALL := install
 
 all : $(APPS)
 
-        @echo " "
-        @echo " Install with "
-        @echo "      sudo make install"
-        @echo ""
+	@echo " "
+	@echo " Install with "
+	@echo "      sudo make install"
+	@echo ""
 
 
 
@@ -20,19 +20,19 @@ all : $(APPS)
 .PHONY: install
 install : $(APPS)
 
-        $(INSTALL) switcher $(INSTALLDIR)/sbin
-        $(INSTALL) swstopstart $(INSTALLDIR)/sbin
-        $(INSTALL) swupdater $(INSTALLDIR)/sbin
-        $(INSTALL) swgitstatus $(INSTALLDIR)/sbin
+	$(INSTALL) switcher $(INSTALLDIR)/sbin
+	$(INSTALL) swstopstart $(INSTALLDIR)/sbin
+	$(INSTALL) swupdater $(INSTALLDIR)/sbin
+	$(INSTALL) swgitstatus $(INSTALLDIR)/sbin
 
 
 .PHONY: clean
 clean :
-        git fetch --force && git reset --hard origin/master
+	git fetch --force && git reset --hard origin/master
 
 
 depend : $(wildcard *.c)
-        makedepend -f $(lastword $(MAKEFILE_LIST)) -- $(CFLAGS) -- $^
+	makedepend -f $(lastword $(MAKEFILE_LIST)) -- $(CFLAGS) -- $^
 
 
 #

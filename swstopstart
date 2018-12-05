@@ -3,7 +3,7 @@
 #
 # Quick version may get tidyer later
 #
-# DO NOT RUN via Nextion .. the stop of mmdvmhost will stop NExtionDriver killing the job
+# DO NOT RUN directly via Nextion .. the stop of mmdvmhost will stop NExtionDriver killing the job
 #
 PISTUPDATE=/usr/local/sbin/pistar-update
 VERSION="0.1.0rc1 14Nov18"

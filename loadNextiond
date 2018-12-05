@@ -1,0 +1,49 @@
+#!/bin/bash
+#Use python to load a known screen
+
+CONFDIR=/home/pi-star/configs
+NEXTDIR=/home/pi-star/Pi-Star_switcher/Nextion/
+VERSION="0.1.0 5Dec18"
+version () {
+ msg="Version: $(basename $0) $VERSION"
+ returnmsg
+ exit 0
+}
+returnmsg () {
+  echo $msg
+}
+
+
+usage () {
+ echo "Usage: $(basename $0) [ -h|-v]"
+ echo ""
+ echo "      -h  This help text"
+ echo "      -v   version"
+ echo ""
+ echo "Example: $(basename $0) "
+ echo "Will stop services, wait then try to send configs/Switcher.tft to the Nextion"
+ echo ""
+ echo " Currently no checking"
+ exit 0
+}
+
+
+ # for future state with multiple options
+ while getopts "hv" opt ; do
+   case $opt in
+
+     h ) usage ;;
+     v ) version ;;
+    \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
+   esac
+ done
+ shift $(($OPTIND -1))
+ #  $* is left over
+ swstopstart stop
+
+ sleep 15
+ sudo mount -o remount,rw /
+ cd $NEXTDIR
+ python nextion.py $CONFDIR/Switcher.tft /dev/ttyUSB0
+ sleep 10
+ swstopstart restart

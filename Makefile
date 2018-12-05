@@ -24,6 +24,8 @@ install : $(APPS)
 	$(INSTALL) swstopstart $(INSTALLDIR)/sbin
 	$(INSTALL) swupdater $(INSTALLDIR)/sbin
 	$(INSTALL) swgitstatus $(INSTALLDIR)/sbin
+	$(INSTALL) loadNextion $(INSTALLDIR)/sbin
+	$(INSTALL) loadNextiond $(INSTALLDIR)/sbin
 
 
 .PHONY: clean
@@ -38,4 +40,4 @@ depend : $(wildcard *.c)
 #
 # The following is updated by "make depend"
 #
-# DO NOT DELETE 
+# DO NOT DELETE

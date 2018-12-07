@@ -26,6 +26,8 @@ install : $(APPS)
 	$(INSTALL) swgitstatus $(INSTALLDIR)/sbin
 	$(INSTALL) loadNextion $(INSTALLDIR)/sbin
 	$(INSTALL) loadNextiond $(INSTALLDIR)/sbin
+	$(INSTALL) UserGroup/groups.txt $(INSTALLDIR)/etc
+	$(INSTALL) UserGroup/stripped.csv $(INSTALLDIR)/etc
 
 
 .PHONY: clean

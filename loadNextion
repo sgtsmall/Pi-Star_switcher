@@ -44,5 +44,7 @@ while getopts "hv" opt ; do
 done
 shift $(($OPTIND -1))
 #  $* is left over
+sudo mount -o remount,rw /
+sleep 2
 loadNextiond > $CONFDIR/loadNextion.log 2>&1 &
 disown

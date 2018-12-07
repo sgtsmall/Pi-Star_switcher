@@ -2,7 +2,7 @@
 # Makefile for local scripts
 #
 
-APPS := switcher swstopstart swupdater swgitstatus
+APPS := switcher swstopstart swupdater swgitstatus loadNextion loadNextiond
 INSTALLDIR := /usr/local
 SSERVICEDIR := /lib/systemd/system
 INSTALL := install

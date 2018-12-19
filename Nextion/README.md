@@ -10,6 +10,8 @@ sudo apt-get install python-serial
 ```
 more work required here will need a script to shutdown mmdvmhost and watchdog whilst loading the file.
 
+loadNextion and loadNextiond have been created... loadNextion trys to launch loadNextiond in the background and detach before the mmdvmhost stops... doesn't yet work from the screen.
+
 
 # Update Nextion Displays from the Command Line
 

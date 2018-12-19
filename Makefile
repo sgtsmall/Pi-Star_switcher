@@ -6,6 +6,7 @@ APPS := switcher swstopstart swupdater swgitstatus loadNextion loadNextiond
 INSTALLDIR := /usr/local
 SSERVICEDIR := /lib/systemd/system
 INSTALL := install
+DATADIR := /home/pi-star/configs
 
 all : $(APPS)
 
@@ -28,7 +29,7 @@ install : $(APPS)
 	$(INSTALL) loadNextiond $(INSTALLDIR)/sbin
 	$(INSTALL) UserGroup/groups.txt $(INSTALLDIR)/etc
 	$(INSTALL) UserGroup/stripped.csv $(INSTALLDIR)/etc
-
+	$(INSTALL) configs/MMDVM.conflist $(DATADIR)
 
 .PHONY: clean
 clean :

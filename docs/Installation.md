@@ -69,3 +69,18 @@ cd Pi-Star_switcher
 git pull origin master
 sudo make install
 ```
+
+
+### Pi-Star - mobile
+
+these are great mobile device web pages
+
+```
+rpi-rw
+sudo wget -O /tmp/pi-star.mobile.install.sh http://www.w0otm.com/pistar/pi-star.mobile.install.sh
+sudo chmod 555 /tmp/pi-star.mobile.install.sh
+sudo /tmp/pi-star.mobile.install.sh
+```
+
+
+script to download data sudo wget -O /var/www/dashboard/mobile/data.csv http://www.amateurradio.digital/pi-star_data.php

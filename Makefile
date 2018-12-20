@@ -2,8 +2,10 @@
 # Makefile for local scripts
 #
 
-APPS := switcher swstopstart swupdater swgitstatus loadNextion loadNextiond
-INSTALLDIR := /usr/local
+APPS := switcher swstopstart swupdater swgitstatus swupdateuser loadNextion loadNextiond swupdateuser
+UDATFILE := groups.txt stripped.csv
+DATFILE := configs/MMDVM.conflist
+PREFIX := /usr/local
 SSERVICEDIR := /lib/systemd/system
 INSTALL := install
 DATADIR := /home/pi-star/configs
@@ -21,15 +23,21 @@ all : $(APPS)
 .PHONY: install
 install : $(APPS)
 
-	$(INSTALL) switcher $(INSTALLDIR)/sbin
-	$(INSTALL) swstopstart $(INSTALLDIR)/sbin
-	$(INSTALL) swupdater $(INSTALLDIR)/sbin
-	$(INSTALL) swgitstatus $(INSTALLDIR)/sbin
-	$(INSTALL) loadNextion $(INSTALLDIR)/sbin
-	$(INSTALL) loadNextiond $(INSTALLDIR)/sbin
-	$(INSTALL) UserGroup/groups.txt $(INSTALLDIR)/etc
-	$(INSTALL) UserGroup/stripped.csv $(INSTALLDIR)/etc
-	$(INSTALL) configs/MMDVM.conflist $(DATADIR)
+	$(INSTALL) $< $(PREFIX)/sbin
+#	$(INSTALL) swstopstart $(INSTALLDIR)/sbin
+#	$(INSTALL) swupdater $(INSTALLDIR)/sbin
+#	$(INSTALL) swupdater $(INSTALLDIR)/sbin
+#	$(INSTALL) swgitstatus $(INSTALLDIR)/sbin
+#	$(INSTALL) loadNextion $(INSTALLDIR)/sbin
+#	$(INSTALL) loadNextiond $(INSTALLDIR)/sbin
+#	$(INSTALL) UserGroup/groups.txt $(INSTALLDIR)/etc
+#	$(INSTALL) UserGroup/stripped.csv $(INSTALLDIR)/etc
+#	$(INSTALL) configs/MMDVM.conflist $(DATADIR)
+
+.PHONY: install-list
+install-list : $(DATFILE)
+	$(INSTALL) $< $(DATADIR)
+
 
 .PHONY: clean
 clean :

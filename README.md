@@ -12,17 +12,21 @@ Relies on functionality of NextionDriver by ON7LDS
   * "JumboSpot"
   * MMDVM_HS_Dual_Hat "1.0"
   * MMDVM_HS_Dual_Hat "1.3"
+  * DVMEGA UHF
 
 * Nano
+  * Nano-Spot
 
 
 ## Screens tested
 
 * Basic
-  * 400x320 3.2
+  * 400x240 3.2
+  * 480x320 3.5
 
 * Enhanced
-  * 400x320 3.2
+  * 400x240 3.2
+  * 480x320 3.5
 
 
 ## Additional Features
@@ -32,12 +36,17 @@ switcher also has additional features not found in other better programs!.
 * added script swstopstart to stop and start and restart services. don't run stop from Nextion
 * Folder Nextion contains a sample tft
 * it also has the nextion.py function to try and load the tft to the screen
+* also a userid updater for the Nextion...
+* need to find a way to deal with breaking the web page lookup of user data for the standard screen, you have to turn it off if you want the extended data, mobile screen works off it's own data file so it's ok.
+
 * and a set of steak knives
-* ok so not realy that last bit.
+* ok so not really that last bit.
 
 ## Installation
 
 See: https://github.com/sgtsmall/Pi-Star_switcher/tree/master/docs/Installation.md
+
+note in your Expert settings for NextionDisplay  make sure you have /usr/local/etc/  (trailing / ) in the the data file directory entry, or you too could spend a couple of hours going around in circles.
 
 ## Documentation
 

@@ -1,7 +1,14 @@
 # Slightly modified from md380tools version
 include ../curl.mak
 
-.PHONY: all update clean
+
+INSTALLDIR := /usr/local
+INSTALL := install
+ICONV=iconv -c -f UTF-8 -t ascii//TRANSLIT
+
+
+
+.PHONY: all update clean install
 
 #all: stripped.csv repeaters.csv users.json repeaters.json
 all: stripped.csv
@@ -12,17 +19,17 @@ clean:
 update:
 	"${MAKE}" clean
 	"${MAKE}" stripped.csv
+	sudo "${MAKE}" install
 
 #This strips out all unicode characters.
 #We'd rather just drop the accents.
-ICONV=iconv -c -f UTF-8 -t ascii//TRANSLIT
 
 custom.csv:
 	touch custom.csv
 
 #stripped.csv: custom.csv special.tmp fixed.csv dmrmarc2.tmp reflector.tmp
 stripped.csv: custom.csv newuser.tmp
-	awk -F, -f combine.awk $^ | $(ICONV)  | sort -t ',' -k1g,1 | awk -F, -f strip.awk >stripped.csv	
+	awk -F, -f combine.awk $^ | $(ICONV)  | sort -t ',' -k1g,1 | awk -F, -f strip.awk >stripped.csv
 
 newuser.tmp:
 	curl  $(CURL_FLAGS) 'https://www.radioid.net/static/users.csv' >$@
@@ -53,3 +60,10 @@ newuser.tmp:
 
 
 ci: clean all
+
+
+.PHONY: install
+install : $(APPS)
+
+	$(INSTALL) groups.txt $(INSTALLDIR)/etc
+	$(INSTALL) stripped.csv $(INSTALLDIR)/etc

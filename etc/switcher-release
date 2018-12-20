@@ -1,0 +1,5 @@
+[switcher]
+switcher_Build_Date = 19-Jul-2018
+Version = 0.9.10rc6
+kernel = 4.9.35+
+Hardware = RPi

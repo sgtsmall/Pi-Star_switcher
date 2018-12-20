@@ -1,13 +1,14 @@
 {
     "1": "Local",
     "2": "Local\/Cluster",
-    "8": "Regional",
+    "6": "DMR Gateway - XLX"
+    "8": "Regional or DMRG",
     "9": "Local or Reflector",
     "91": "World-wide",
     "92": "Europe",
     "93": "North America",
     "94": "Asia, Middle East",
-    "95": "Australia, New Zeland",
+    "95": "Australia, New Zealand",
     "202": "\u0394\u03b9\u03b5\u03b8\u03bd\u03ad\u03c2 \u0395\u03bb\u03bb\u03ac\u03b4\u03b1",
     "204": "Nederland",
     "206": "Belgium",

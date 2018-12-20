@@ -1,0 +1,49 @@
+#!/bin/bash
+#Routine to update users
+#
+# Quick version may get tidyer later
+#
+#
+
+HOMEDIR=/home/pi-star
+CONFDIR=/home/pi-star/configs
+DATAHOME=$HOMEDIR/Pi-Star_switcher/UserGroup
+PISTUPDATE=/usr/local/sbin/pistar-update
+VERSION="0.1.0.rc1 20Dec18"
+version () {
+ msg="Version: $(basename $0) $VERSION"
+ returnmsg
+ exit 0
+}
+returnmsg () {
+  echo $msg
+}
+
+usage () {
+ echo "Usage: $(basename $0)"
+ echo ""
+ echo "      -h  This help text"
+ echo "      -v  version"
+ echo ""
+ echo "initiates a backgrounded update of the userdata"
+}
+
+test -r $DATAHOME || exit 1
+test -r $PISTUPDATE || exit 1
+
+# for future state with multiple options
+while getopts "hOv" opt ; do
+  case $opt in
+
+    h ) usage ;;
+    v ) version ;;
+   \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
+  esac
+done
+shift $(($OPTIND -1))
+#  $* is left over
+sudo mount -o remount,rw /
+sleep 2
+cd $DATAHOME
+make update
+swstopstart restart

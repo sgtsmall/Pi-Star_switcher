@@ -1,16 +1,14 @@
 #!/bin/bash
 #Routine to upload Nextion screen
 #
-# Quick version may get tidyer later
-#
-# DO NOT RUN via Nextion .. the stop of mmdvmhost will stop NExtionDriver killing the job
+# Now seems to reliably load via Nextion as a cron job
 #
 
 HOMEDIR=/home/pi-star
 CONFDIR=/home/pi-star/configs
 GITHOME=$HOMEDIR/Pi-Star_switcher
 PISTUPDATE=/usr/local/sbin/pistar-update
-VERSION="0.1.1rc1 5Dec18"
+VERSION="1.0.0 25Dec18"
 version () {
  msg="Version: $(basename $0) $VERSION"
  returnmsg
@@ -46,5 +44,5 @@ shift $(($OPTIND -1))
 #  $* is left over
 sudo mount -o remount,rw /
 sleep 2
-loadNextiond > $CONFDIR/loadNextion.log 2>&1 &
-disown
+
+(crontab -l ; echo "* * * * * /usr/local/sbin/loadNextiond >> $CONFDIR/loadNextiond.log 2>&1") | crontab -

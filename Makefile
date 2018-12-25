@@ -2,8 +2,8 @@
 # Makefile for local scripts
 #
 
-APPS := switcher swstopstart swupdater swgitstatus swupdateuser loadNextion loadNextiond swupdateuser
-UDATFILE := groups.txt stripped.csv
+APPS := switcher swstopstart swupdater swgitstatus swupdateuser loadNextion loadNextiond swupdateuser setNextion
+UDATFILE := UserGroup/groups.txt UserGroup/stripped.csv
 DATFILE := configs/MMDVM.conflist
 PREFIX := /usr/local
 SSERVICEDIR := /lib/systemd/system
@@ -15,7 +15,9 @@ all : $(APPS)
 	@echo " "
 	@echo " Install with "
 	@echo "      sudo make install"
-	@echo ""
+	@echo "	 sudo make install-list"
+	@echo "	 sudo make install-user"
+	@echo "   then run swupdateuser to get latest list"
 
 
 
@@ -23,26 +25,26 @@ all : $(APPS)
 .PHONY: install
 install : $(APPS)
 
-	$(INSTALL) $< $(PREFIX)/sbin
-#	$(INSTALL) swstopstart $(INSTALLDIR)/sbin
-#	$(INSTALL) swupdater $(INSTALLDIR)/sbin
-#	$(INSTALL) swupdater $(INSTALLDIR)/sbin
-#	$(INSTALL) swgitstatus $(INSTALLDIR)/sbin
-#	$(INSTALL) loadNextion $(INSTALLDIR)/sbin
-#	$(INSTALL) loadNextiond $(INSTALLDIR)/sbin
-#	$(INSTALL) UserGroup/groups.txt $(INSTALLDIR)/etc
-#	$(INSTALL) UserGroup/stripped.csv $(INSTALLDIR)/etc
-#	$(INSTALL) configs/MMDVM.conflist $(DATADIR)
+	$(INSTALL) $^ $(PREFIX)/sbin
 
 .PHONY: install-list
 install-list : $(DATFILE)
-	$(INSTALL) $< $(DATADIR)
+	$(INSTALL) $^ $(DATADIR)
+
+
+.PHONY: install-user
+install-user : $(UDATFILE)
+	$(INSTALL) $^ $(PREFIX)/etc
+
 
 
 .PHONY: clean
 clean :
 	git fetch --force && git reset --hard origin/master
 
+.PHONY: clean-all
+clean-all :
+	rm -r $DATADIR
 
 depend : $(wildcard *.c)
 	makedepend -f $(lastword $(MAKEFILE_LIST)) -- $(CFLAGS) -- $^

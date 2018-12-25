@@ -1,0 +1,59 @@
+#!/bin/bash
+#set up a particular screen for loadNextion
+
+CONFDIR=/home/pi-star/configs
+NEXTDIR=/home/pi-star/Pi-Star_switcher/Nextion/
+VERSION="1.0.0 25Dec18"
+version () {
+ msg="Version: $(basename $0) $VERSION"
+ returnmsg
+ exit 0
+}
+returnmsg () {
+  echo $msg
+}
+
+returncurr () {
+	mcurr=`readlink $CONFDIR/Switcher.tft | xargs -n 1 basename`
+}
+
+
+usage () {
+ echo "Usage: $(basename $0) [ -h|-v|-l] [-s 32|35 -t B|E -m S|D]"
+ echo ""
+ echo "	-l list screens"
+ echo "     -s 35 -t B|E -m S|D"
+ echo "     -h  This help text"
+ echo "     -v   version"
+ echo ""
+ echo "Example: $(basename $0) "
+ echo "Need to specify -s screensize 32 (3.2) or 35 (3.5)"
+ echo "	           -t  type is B basic or E enhanced"
+ echo "	           -m  mode is D dualhat or S singlehat"
+  echo " Currently little or no checking"
+ exit 0
+}
+
+
+ # for future state with multiple options
+ while getopts "lhvs:t:m:" opt ; do
+   case $opt in
+     l ) ls -1 $NEXTDIR*.tft	;;
+     h ) usage ;;
+     v ) version ;;
+     s ) SCRSIZE="$OPTARG" ; oupdate=0 ;;
+     t ) SCRTYPE="$OPTARG" ; oupdate=0 ;;
+     m ) SCRMODE="$OPTARG" ; oupdate=0 ;;
+
+    \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
+   esac
+ done
+ shift $(($OPTIND -1))
+ returncur
+ if [-n "$oupdate" ][ -n "$SCRSIZE" ] && [ -n "$SCRTYPE" ] && [ -n "$SCRMODE" ] {
+	if [ $SCRTYPE = 'B' ] then $SCRTYPE='Basic';
+	if [ $SCRTYPE = 'E' ] then $SCRTYPE='Enhanced';
+	ln -s $NEXTDIRSwitcher$SCRMODE_$SCRSIZE_$SCRTYPE.tft $CONFDIR/Switcher.tft
+ }
+
+ #  $* is left over

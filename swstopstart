@@ -31,21 +31,21 @@ case $1 in
 
   stop)
     sudo mount -o remount,rw /
-    grep 'systemctl stop' $PISTUPDATE  > /tmp/stoplist
+    sudo grep 'systemctl stop' $PISTUPDATE  > /tmp/stoplist
     sudo sh /tmp/stoplist &
     exit 0
     ;;
 
   start)
     sudo mount -o remount,rw /
-    grep 'systemctl start' $PISTUPDATE  > /tmp/startlist
+    sudo grep 'systemctl start' $PISTUPDATE  > /tmp/startlist
     sudo sh /tmp/startlist &
     exit 0
     ;;
 
   restart)
     sudo mount -o remount,rw /
-    grep 'systemctl start' $PISTUPDATE | sed 's/ start/ restart/' > /tmp/restartlist
+    sudo grep 'systemctl start' $PISTUPDATE | sed 's/ start/ restart/' > /tmp/restartlist
     sudo sh /tmp/restartlist &
     exit 0
     ;;

@@ -4,12 +4,12 @@
 # Quick version may get tidyer later
 #
 #
-
+PREFIX=/usr/local/sbin
 HOMEDIR=/home/pi-star
 CONFDIR=/home/pi-star/configs
 DATAHOME=$HOMEDIR/Pi-Star_switcher/UserGroup
 PISTUPDATE=/usr/local/sbin/pistar-update
-VERSION="0.1.0.rc1 20Dec18"
+VERSION="1.0.0 25Dec18"
 version () {
  msg="Version: $(basename $0) $VERSION"
  returnmsg
@@ -46,4 +46,4 @@ sudo mount -o remount,rw /
 sleep 2
 cd $DATAHOME
 make update
-swstopstart restart
+sudo $PREFIX/swstopstart restart

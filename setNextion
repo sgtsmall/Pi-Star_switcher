@@ -49,11 +49,23 @@ usage () {
    esac
  done
  shift $(($OPTIND -1))
- returncur
- if [-n "$oupdate" ][ -n "$SCRSIZE" ] && [ -n "$SCRTYPE" ] && [ -n "$SCRMODE" ] {
-	if [ $SCRTYPE = 'B' ] then $SCRTYPE='Basic';
-	if [ $SCRTYPE = 'E' ] then $SCRTYPE='Enhanced';
-	ln -s $NEXTDIRSwitcher$SCRMODE_$SCRSIZE_$SCRTYPE.tft $CONFDIR/Switcher.tft
+ #returncurr
+ if [ -n "$oupdate" ] && [ -n "$SCRSIZE" ] && [ -n "$SCRTYPE" ] && [ -n "$SCRMODE" ] ; then {
+	if [ "$SCRTYPE" = "B" ] ; then SCRTYPE='Basic'; fi
+	if [ "$SCRTYPE" = "E" ] ; then SCRTYPE='Enhanced'; fi
+	newfile=$NEXTDIR"Switcher"$SCRMODE"_"$SCRSIZE"_"$SCRTYPE".tft"
+	if [ -f $newfile ] ; then {
+		rm $CONFDIR/Switcher.tft
+		ln -s $newfile $CONFDIR/Switcher.tft
+		}
+	fi
+	returncurr
+ } else {
+ 	echo ""
+	echo " setting requires all 3 options  s, t, m"
+	echo ""
+	usage;
  }
+ fi
 
  #  $* is left over

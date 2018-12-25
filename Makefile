@@ -8,6 +8,7 @@ DATFILE := configs/MMDVM.conflist
 PREFIX := /usr/local
 SSERVICEDIR := /lib/systemd/system
 INSTALL := install
+MKDIR_P := mkdir -p
 DATADIR := /home/pi-star/configs
 
 all : $(APPS)
@@ -29,7 +30,8 @@ install : $(APPS)
 
 .PHONY: install-list
 install-list : $(DATFILE)
-	$(INSTALL) $^ $(DATADIR)
+	$(MKDIR_P) $(DATADIR)
+	$(INSTALL) $^ $(DATADIR)/
 
 
 .PHONY: install-user
@@ -44,7 +46,7 @@ clean :
 
 .PHONY: clean-all
 clean-all :
-	rm -r $DATADIR
+	rm -r $(DATADIR)
 
 depend : $(wildcard *.c)
 	makedepend -f $(lastword $(MAKEFILE_LIST)) -- $(CFLAGS) -- $^

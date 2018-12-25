@@ -4,7 +4,7 @@ Originally developed to support Nextion touch screen change.
 Lots to do
 Relies on functionality of NextionDriver by ON7LDS
 
-0.9.10rc6 19Nov18
+1.1.0 25Dec18
 
 ## HotSpots tested
 
@@ -34,7 +34,7 @@ Relies on functionality of NextionDriver by ON7LDS
 switcher also has additional features not found in other better programs!.
 
 * added script swstopstart to stop and start and restart services. don't run stop from Nextion
-* Folder Nextion contains a sample tft
+* Folder Nextion contains some sample tft and HMI files
 * it also has the nextion.py function to try and load the tft to the screen
 * also a userid updater for the Nextion...
 * need to find a way to deal with breaking the web page lookup of user data for the standard screen, you have to turn it off if you want the extended data, mobile screen works off it's own data file so it's ok.
@@ -94,17 +94,28 @@ Usage: swstopstart [stop|start|restart]
       restart   converts start to restart of pistar services
 
 ```
-This can be used with the nextion.py function
-e.g.
+
+# setNextion
+
+  will create sym link from a Nextion tft file to the configs directory
 
 ```
-cd Nextion
-swstopstart stop
-python nextion.py SwitcherD_32_Enhanced.txt /dev/USB0
-swstopstart start
+Usage: setNextion [ -h|-v|-l] [-s 32|35 -t B|E -m S|D]"
+
+	-l list screens"
+     	-s 35 -t B|E -m S|D"
+     	-h  This help text"
+     	-v   version"
+
+Example: setNextion -s 35 -t B -m S
+
+	Need to specify -s screensize 32 (3.2) or 35 (3.5)"
+              	-t  type is B basic or E enhanced"
+   	           -m  mode is D dualhat or S singlehat"
+     Currently little or no checking"
 ```
 
-
+This file can then be loaded via the upload Nextion button on screen.
 
 
 

@@ -27,26 +27,24 @@ usage () {
 
 test -r $PISTUPDATE || exit 1
 
+sudo mount -o remount,rw /
+sudo echo 'dowhat=${1}' >/tmp/pistarservices
+sudo grep 'systemctl ' $PISTUPDATE >>/tmp/pistarservices
+
 case $1 in
 
   stop)
-    sudo mount -o remount,rw /
-    sudo grep 'systemctl stop' $PISTUPDATE  > /tmp/stoplist
-    sudo sh /tmp/stoplist &
+    sudo sh /tmp/pistarservices stop &
     exit 0
     ;;
 
   start)
-    sudo mount -o remount,rw /
-    sudo grep 'systemctl start' $PISTUPDATE  > /tmp/startlist
-    sudo sh /tmp/startlist &
+    sudo sh /tmp/pistarservices start &
     exit 0
     ;;
 
   restart)
-    sudo mount -o remount,rw /
-    sudo grep 'systemctl start' $PISTUPDATE | sed 's/ start/ restart/' > /tmp/restartlist
-    sudo sh /tmp/restartlist &
+    sudo sh /tmp/pistarservices restart &
     exit 0
     ;;
 

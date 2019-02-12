@@ -28,7 +28,7 @@ usage () {
 test -r $PISTUPDATE || exit 1
 
 sudo mount -o remount,rw /
-sudo echo 'dowhat=${1}' >/tmp/pistarservices
+sudo echo 'doWhat=${1}' >/tmp/pistarservices
 sudo grep 'systemctl ' $PISTUPDATE >>/tmp/pistarservices
 
 case $1 in

@@ -24,15 +24,19 @@ update:
 #This strips out all unicode characters.
 #We'd rather just drop the accents.
 
-custom.csv:
-	touch custom.csv
+custom.csv: groups.txt
+	awk -F: -f groupcustom.awk $^ > $@
 
 #stripped.csv: custom.csv special.tmp fixed.csv dmrmarc2.tmp reflector.tmp
-stripped.csv: custom.csv newuser.tmp
-	awk -F, -f combine.awk $^ | $(ICONV)  | sort -t ',' -k1g,1 | awk -F, -f strip.awk >stripped.csv
+stripped.csv: custom.csv reorder.tmp
+	awk -F, -f combine.awk $^ | $(ICONV)  | sort -t ',' -k1g,1 | awk 'NR>3' >stripped.csv
+
+reorder.tmp: newuser.tmp
+	sed 's/:/,/g' $^ |sed 's/",/":/g'  |awk -F: -f reorder.awk  >$@
 
 newuser.tmp:
-	curl  $(CURL_FLAGS) 'https://www.radioid.net/static/users.csv' >$@
+	curl  $(CURL_FLAGS) 'https://www.radioid.net/api/dmr/user/?country=%&format=csv' >$@
+
 ##dmrmarc2.tmp: dmrmarc.tmp
 ##	awk -F, -f insert_nick.awk <$< >$@
 

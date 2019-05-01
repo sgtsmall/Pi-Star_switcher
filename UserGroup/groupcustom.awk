@@ -11,5 +11,5 @@ BEGIN {
     S = " "
 }
 {
-print trim($1) T trim($2) T T T
+print trim($1) T trim($2) T T T T
 }

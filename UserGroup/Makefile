@@ -32,10 +32,12 @@ stripped.csv: custom.csv reorder.tmp
 	awk -F, -f combine.awk $^ | $(ICONV)  | sort -t ',' -k1g,1 | awk 'NR>3' >stripped.csv
 
 reorder.tmp: newuser.tmp
-	sed 's/:/,/g' $^ |sed 's/",/":/g'  |awk -F: -f reorder.awk  >$@
+##	sed 's/:/,/g' $^ |sed 's/",/":/g'  |
+	awk -F, -f reorder.awk $^ >$@
 
 newuser.tmp:
-	curl  $(CURL_FLAGS) 'https://www.radioid.net/api/dmr/user/?country=%&format=csv' >$@
+	curl  $(CURL_FLAGS) -o $@ "https://www.radioid.net/static/user.csv"
+##	curl  $(CURL_FLAGS) 'https://www.radioid.net/api/dmr/user/?country=%&format=csv' >$@
 
 ##dmrmarc2.tmp: dmrmarc.tmp
 ##	awk -F, -f insert_nick.awk <$< >$@

@@ -29,35 +29,46 @@ https://github.com/on7lds/NextionDriverInstaller
 
 ### Nano-spot
 
-Has very small filesystem follow the NextionDriver install procedure to put the files in tmp
+Has very small filesystem configured expand the filesystem to the rest of the internal space.
 
-'''
-cd /tmp
-git clone https://github.com/on7lds/NextionDriverInstaller.git
-sudo NextionDriver/install.sh
-'''
+```
+sudo pistar-expand
+```
+
+then reboot
 
 ### raspberry pi zero (Jumbospot, and similar builds)
+
+```
+rpi-rw
+git clone https://github.com/on7lds/NextionDriverInstaller.git
+sudo NextionDriver/install.sh
+```
 
 Install the NextionDriver in the home folder to have access to sample filesystem
 
 
-'''
-cd
-
-
-### Pi-Star - raspi
+Now install this software
 
 ```
 rpi-rw
 git clone https://github.com/sgtsmall/Pi-Star_switcher
 cd Pi-Star_switcher
 sudo make install
+sudo make install-list
+sudo make install-user
+swupdateuser
 cd
 
 ```
+FYI
+* "install-list" generates a list of sub programs that pi-star has installed
+* "install-user" loads initial set of groups and users that are used in the display
+* "swupdateuser" retrieves the latest list of user id to callsign.
 
-Then run
+
+
+Help for options is available
 ```switcher -h```
 
 

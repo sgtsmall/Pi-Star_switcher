@@ -2,7 +2,32 @@
 # Programming notes for Nextion displays
 
 
-## With on7lds nextiondriver
+## code types sent by MMDVMHost
+
+page *XXX* - switch to page *XXX*
+
+MMDVM.status=*n* - status code *n*
+
+t*n*="*aaa*" - t variable string content *aaa*
+
+t*n*=*nn* - t variable integer content *nn*
+
+Additional instructions generally to Nextion controller independent of page.
+
+- click S0,1 ("press event trigger for S0 button")
+- sleep=*n* - 0 exit sleep, 1 enter sleep
+- dim=*n* - Backlight level
+- ussp=*n* - "no serial" sleep timer seconds
+- thup=*1* - Auto Wake on Touch (0 - Off, 1 On)
+
+page *X* can be page name or page index entry.
+
+All 'MMDVM.status.val=*n*' also sends 'click S0,1'
+
+'MMDVM.status.val=*n*'' is sent after it's data has been sent it is a flag to update the appropriate screen values.
+
+
+### With on7lds nextiondriver
 
 Callsign Name lookup uses
 
@@ -17,10 +42,11 @@ MAXUSERS(200000)
 is currently coded, presumably he will look further if required.
 
 
-I have written the script swupdateuser to refresh this data.
+I have written the script *swupdateuser* to refresh this data.
 
 (Need to improve the group handling e.g. TG 5)
 
+Additional codes
 
 **MMDVM**
 - page MMDVM
@@ -36,8 +62,88 @@ I have written the script swupdateuser to refresh this data.
 
 [MM] Note : these are now sent by MMDVMHost anyway
 
+bco and pco are field colour change values, this lets you set red/green etc.
 
-A* and N* when showModeStatus is active
+- A1.bco=%d  //modeIsEnabled[C_DSTAR]
+- A1.pco=%d  //modeIsEnabled[C_DSTAR]
+- A2.bco=%d  //modeIsEnabled[C_DMR]
+- A2.pco=%d  //modeIsEnabled[C_DMR]
+- A3.bco=%d  //modeIsEnabled[C_YSF]
+- A3.pco=%d  //modeIsEnabled[C_YSF]
+- A4.bco=%d  //modeIsEnabled[C_P25]
+- A4.pco=%d  //modeIsEnabled[C_P25]
+- A5 Currently Spare
+- A6.bco=%d  //modeIsEnabled[C_NXDN]
+- A6.pco=%d  //modeIsEnabled[C_NXDN]
+
+- N0.bco=%d  //netisactive
+- N0.pco=%d  //netisactive
+- N1.bco=%d  //modeIsEnabled[C_DSTARNET]
+- N1.pco=%d  //modeIsEnabled[C_DSTARNET]
+- N2.bco=%d  //modeIsEnabled[C_DMRNET]
+- N2.pco=%d  //modeIsEnabled[C_DMRNET]
+- N3.bco=%d  //modeIsEnabled[C_YSFNET]
+- N3.pco=%d  //modeIsEnabled[C_YSFNET]
+- N4.bco=%d  //modeIsEnabled[C_P25NET]
+- N4.pco=%d  //modeIsEnabled[C_P25NET]
+- N5 Currently Spare
+- A6.bco=%d  //modeIsEnabled[C_NXDNNET]
+- A6.pco=%d  //modeIsEnabled[C_NXDNNET]
+ - MMDVM.status.val=24
+
+A* and N* when showModesStatus is active
+
+
+
+**DMR**
+- t8.txt="%s",TGname //Slot 2
+- t9.txt="%s",TGname //Slot 1
+
+Slot 2
+
+- t13.txt="%s",users[user].data1  //Callsign
+- t14.txt="%s",users[user].data2  //Name
+- t15.txt="%s",users[user].data3  //City
+- t16.txt="%s",users[user].data4  //State
+- t17.txt="%s",users[user].data5  //(blank)
+ - MMDVM.status.val=78
+
+Slot 1
+
+- t18.txt="%s",users[user].data1
+- t19.txt="%s",users[user].data2
+- t20.txt="%s",users[user].data3
+- t21.txt="%s",users[user].data4
+- t22.txt="%s",users[user].data5
+ - MMDVM.status.val=68
+
+
+
+**Startup**
+- sleep=0
+- page 0
+- cls 0
+- dim=100
+- t0.txt="NextionDriver"
+- t1.txt="%s"",NextionDriver_VERSION);
+- t2.txt="Started"
+- ussp=%d",sleepWhenInactive);
+- thup=1
+timed loop (180 seconds)
+- t3.txt="%d %s"", start, ipaddr);
+    else
+- t3.txt="%d Waiting for network ..."", start);
+- t3.txt="%s"", ipaddr);
+
+**Termination**
+- sleep=0
+- ussp=0
+- page 0
+- cls 0
+- dim=50
+- t0.txt="NextionDriver"
+- t1.txt="%s",NextionDriver_VERSION
+- t2.txt="Stopped"
 
 ## Without on7lds nextiondriver (default)
 
@@ -49,26 +155,6 @@ Callsign Name lookup uses
 that should be updated from time to time by Pi-star "update".
 
 
-### code types sent by MMDVMHost
-
-page *XXX* - switch to page *XXX*
-
-MMDVM.status=*n* - status code *n*
-
-t*n*="*aaa*" - t variable string content *aaa*
-
-Additional instructions generally to Nextion controller independent of page.
-- click S0,1 ("press event trigger for S0 button")
-- sleep=*n* - 0 exit sleep, 1 enter sleep
-- dim=*n* - Backlight level
-- ussp=*n* - "no serial" sleep timer seconds
-- thup=*1* - Auto Wake on Touch (0 - Off, 1 On)
-
-page *X* can be page name or page index entry.
-
-All 'MMDVM.status.val=*n*' also sends 'click S0,1'
-
-'MMDVM.status.val=*n*'' is sent after it's data has been sent it is a flag to update the appropriate screen values.
 
 **MMDVM**
 - page MMDVM

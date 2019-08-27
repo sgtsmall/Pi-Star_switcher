@@ -26,8 +26,11 @@ All 'MMDVM.status.val=*n*' also sends 'click S0,1'
 
 'MMDVM.status.val=*n*'' is sent after it's data has been sent it is a flag to update the appropriate screen values.
 
+## notes -
+- several types of data are sent with font codes and colours, you can override these by assigning the value to a localvar va*x*=t*n* and then locally set the visibility of the t*n* field.
 
-### With on7lds nextiondriver
+
+### Extra Fields With on7lds nextiondriver
 
 Callsign Name lookup uses
 
@@ -63,6 +66,10 @@ Additional codes
 [MM] Note : these are now sent by MMDVMHost anyway
 
 bco and pco are field colour change values, this lets you set red/green etc.
+#define bcoEN	1472
+#define bcoDIS	25356
+#define pcoEN	0
+#define pcoDIS	46486
 
 - A1.bco=%d  //modeIsEnabled[C_DSTAR]
 - A1.pco=%d  //modeIsEnabled[C_DSTAR]
@@ -235,27 +242,32 @@ DStar Clear
 **DMR**
 - page DMR
  - MMDVM.status.val=3
-- t0.pco=0"
-- t0.font=4"
+
+TS - Listening - ID - TA - CallEnd - More
+1 | 61 | 62 | 63 | 64 | 65
+2 | 69 | 70 | 71 | 72 | 73
+
+- t0.pco=0
+- t0.font=4
 - t0.txt="1 Listening"
  - MMDVM.status.val=61
 
-- t2.pco=0"
-- t2.font=4"
+- t2.pco=0
+- t2.font=4
 - t2.txt="2 Listening"
  - MMDVM.status.val=69
 
 - t0.txt="1 %s %s", type, src
-- t0.pco=0"
-- t0.font=4"
+- t0.pco=0
+- t0.font=4
  - MMDVM.status.val=70
 
 - t1.txt="%s%s", group ? "TG" : ", dst
  - MMDVM.status.val=73
 
 - t2.txt="2 %s %s", type, src
-- t2.pco=0"
-- t2.font=4"
+- t2.pco=0
+- t2.font=4
  - MMDVM.status.val=62
 
 - t3.txt="%s%s", group ? "TG" : ", dst
@@ -275,16 +287,16 @@ DMR TA    (Note this is integer)
  - MMDVM.status.val=72
 
 - t0.txt="1 %s %s", type, talkerAlias
-- t0.font=3"
-- t0.font=2"
-- t0.font=1"
+- t0.font=3
+- t0.font=2
+- t0.font=1
 - t0.pco=1024"
  - MMDVM.status.val=63
 
 - t2.txt="2 %s %s", type, talkerAlias
-- t2.font=3"
-- t2.font=2"
-- t2.font=1"
+- t2.font=3
+- t2.font=2
+- t2.font=1
 - t2.pco=1024"
   - MMDVM.status.val=71
 
@@ -300,16 +312,16 @@ DMR BER
 DMR Clear
 - t0.txt="1 Listening"
  - MMDVM.status.val=61
-- t0.pco=0"
-- t0.font=4"
+- t0.pco=0
+- t0.font=4
 - t1.txt=""
 - t4.txt=""
 - t6.txt=""
 
 - t2.txt="2 Listening"
  - MMDVM.status.val=69
-- t2.pco=0"
-- t2.font=4"
+- t2.pco=0
+- t2.font=4
 - t3.txt=""
 - t5.txt=""
 - t7.txt=""

@@ -1,7 +1,7 @@
 
 # Programming notes for Nextion displays
 
-
+ 
 ## code types sent by MMDVMHost
 
 page *XXX* - switch to page *XXX*

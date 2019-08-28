@@ -34,16 +34,19 @@ sudo grep 'systemctl ' $PISTUPDATE >>/tmp/pistarservices
 case $1 in
 
   stop)
+    sudo systemctl stop nextiondriver &
     sudo sh /tmp/pistarservices stop &
     exit 0
     ;;
 
   start)
+    sudo systemctl start nextiondriver &
     sudo sh /tmp/pistarservices start &
     exit 0
     ;;
 
   restart)
+    sudo systemctl status nextiondriver &
     sudo sh /tmp/pistarservices restart &
     exit 0
     ;;

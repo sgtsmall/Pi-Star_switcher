@@ -257,10 +257,11 @@ t variables
 
 t variables [extended nextiondriver]
 
-| TS | TG | data1 | data2 | data3 | data4 | data5 |
-|---|---|---|---|---|---|---|
-| 1 | t9 | t18 | t19 | t20 | T21 | t22 |
-| 2 | t8 | t13 | t14 | t15 | t16 | t17 |
+| TS | TG | data1 | data2 | data3 | data4 | data5 |status|
+|---|---|---|---|---|---|---|--|
+| 1 | t9 | t18 | t19 | t20 | T21 | t22 |  68
+| 2 | t8 | t13 | t14 | t15 | t16 | t17 | 78
+|   |   | Callsign|Name|City|State|Blank||
 
 - t0.pco=0
 - t0.font=4

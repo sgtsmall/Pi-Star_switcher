@@ -243,9 +243,10 @@ DStar Clear
 - page DMR
  - MMDVM.status.val=3
 
-TS - Listening - ID - TA - CallEnd - More
-1 | 61 | 62 | 63 | 64 | 65
-2 | 69 | 70 | 71 | 72 | 73
+| TS | Listening | ID | TA | CallEnd | More |
+|---|---|---|---|---|---|---|
+| 1 | 61 | 62 | 63 | 64 | 65 |
+| 2 | 69 | 70 | 71 | 72 | 73 |
 
 - t0.pco=0
 - t0.font=4

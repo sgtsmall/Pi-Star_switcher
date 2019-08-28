@@ -1,7 +1,7 @@
 
 # Programming notes for Nextion displays
 
- 
+
 ## code types sent by MMDVMHost
 
 page *XXX* - switch to page *XXX*
@@ -53,7 +53,7 @@ I have written the script *swupdateuser* to refresh this data.
 
 (Need to improve the group handling e.g. TG 5)
 
-Additional codes
+Additional codes sent by nextiondriver
 
 **MMDVM**
 - page MMDVM

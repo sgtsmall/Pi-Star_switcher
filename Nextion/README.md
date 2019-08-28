@@ -1,4 +1,7 @@
 
+# I am investigating the use of  on7lds nextiondriver functions to install screens. This is here for legacy support.
+
+
 # This file and the nextion.py are pulled from
 https://github.com/g4klx/MMDVMHost.git
 

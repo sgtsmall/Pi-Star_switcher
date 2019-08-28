@@ -4,7 +4,9 @@ Originally developed to support Nextion touch screen change.
 Lots to do
 Relies on functionality of NextionDriver by ON7LDS
 
+1.1.1 28Aug19 - minor script change for setNextion
 1.1.0 25Dec18
+
 
 ## HotSpots tested
 
@@ -28,6 +30,7 @@ Relies on functionality of NextionDriver by ON7LDS
   * 400x240 3.2
   * 480x320 3.5
 
+![Pi-Star_switcher Menu](docs/images/pss-menu.png?raw=true "Menu Screen")
 
 ## Additional Features
 
@@ -130,13 +133,6 @@ ideas and questions can be handled on the https://vk2bv.org website soon
 
 Maybe
 
-## Configuration Tool
-
-
-The source for it is here:
-
-https://github.com/sgtsmall/Pi-Star_switcher/etc/placeholderforconfigurationtool
-
 ## Contributing
 
 Contributions are welcome and encouraged.  You can contribute in many ways:
@@ -152,11 +148,3 @@ Next place is the github issue tracker:
 https://github.com/sgtsmall/Pi-Star_switcher/issues
 
 Before creating new issues please check to see if there is an existing one, search first otherwise you waste peoples time when they could be coding instead!
-
-## Developers
-
-Please refer to the development section in the coming soon
-
-
-## Pi_Star switcher Releases
-https://github.com/sgtsmall/Pi-Star_switcher/releases

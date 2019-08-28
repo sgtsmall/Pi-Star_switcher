@@ -253,6 +253,7 @@ t variables
 |---|---|---|---|---|
 | 1 | t0 | t1 | t4 | t6 |
 | 2 | t2 | t3 | t5 | t7 |
+| len | 8 | 8? | 5 | 6 |
 
 t variables [extended nextiondriver]
 

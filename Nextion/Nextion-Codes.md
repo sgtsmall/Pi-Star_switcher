@@ -28,6 +28,10 @@ All 'MMDVM.status.val=*n*' also sends 'click S0,1'
 
 ## notes -
 - several types of data are sent with font codes and colours, you can override these by assigning the value to a localvar va*x*=t*n* and then locally set the visibility of the t*n* field.
+- TA Talker Alias data is sent by some radios on some networks so you usually end up with just the ID in this field.
+[Roger VK3KYY detailed blog about Talker Alias](https://www.rogerclark.net/dmr-talker-alias/)
+- The biggest problem at the moment is occasionally I miss the switch over from standby (Page 0) to DMR (page 1) or in my case one of 4 different DMR pages, from then on the data on the front screen may be mangled.
+I am looking at adding extra logic, if page 0 sees a status value belonging somewhere else it will jump to that page. It should start picking things up from there.
 
 
 ### Extra Fields With on7lds nextiondriver
@@ -65,37 +69,19 @@ Additional codes
 
 [MM] Note : these are now sent by MMDVMHost anyway
 
-bco and pco are field colour change values, this lets you set red/green etc.
+bco and pco are colour change values, this lets you set red/green etc.
 #define bcoEN	1472
 #define bcoDIS	25356
 #define pcoEN	0
 #define pcoDIS	46486
 
-- A1.bco=%d  //modeIsEnabled[C_DSTAR]
-- A1.pco=%d  //modeIsEnabled[C_DSTAR]
-- A2.bco=%d  //modeIsEnabled[C_DMR]
-- A2.pco=%d  //modeIsEnabled[C_DMR]
-- A3.bco=%d  //modeIsEnabled[C_YSF]
-- A3.pco=%d  //modeIsEnabled[C_YSF]
-- A4.bco=%d  //modeIsEnabled[C_P25]
-- A4.pco=%d  //modeIsEnabled[C_P25]
-- A5 Currently Spare
-- A6.bco=%d  //modeIsEnabled[C_NXDN]
-- A6.pco=%d  //modeIsEnabled[C_NXDN]
+|Type|Net|DSTAR|DMR |YSF |P25 |spare|NXDN|
+|----|---|-----|----|----|----|----|----|
+|Mode|   | A1  | A2 | A3 | A4 | A5 | A6 |
+|link| N0| N1  | N2 | N3 |N4  | N5 | N6 |
 
-- N0.bco=%d  //netisactive
-- N0.pco=%d  //netisactive
-- N1.bco=%d  //modeIsEnabled[C_DSTARNET]
-- N1.pco=%d  //modeIsEnabled[C_DSTARNET]
-- N2.bco=%d  //modeIsEnabled[C_DMRNET]
-- N2.pco=%d  //modeIsEnabled[C_DMRNET]
-- N3.bco=%d  //modeIsEnabled[C_YSFNET]
-- N3.pco=%d  //modeIsEnabled[C_YSFNET]
-- N4.bco=%d  //modeIsEnabled[C_P25NET]
-- N4.pco=%d  //modeIsEnabled[C_P25NET]
-- N5 Currently Spare
-- A6.bco=%d  //modeIsEnabled[C_NXDNNET]
-- A6.pco=%d  //modeIsEnabled[C_NXDNNET]
+'A1.bco=%d'
+
  - MMDVM.status.val=24
 
 A* and N* when showModesStatus is active
@@ -107,6 +93,8 @@ A* and N* when showModesStatus is active
 - t9.txt="%s",TGname //Slot 1
 
 Slot 2
+
+There is no logic here it will pull the field from the stripped.csv file.
 
 - t13.txt="%s",users[user].data1  //Callsign
 - t14.txt="%s",users[user].data2  //Name
@@ -164,6 +152,7 @@ that should be updated from time to time by Pi-star "update".
 
 
 **MMDVM**
+
 - page MMDVM
  - MMDVM.status.val=1
 - t0.txt="%s/%u", m_callsign, m_dmrid
@@ -190,6 +179,7 @@ that should be updated from time to time by Pi-star "update".
  - MMDVM.status.val=16
 
 Error
+
 - page MMDVM
  - MMDVM.status.val=1
 - t0.txt="%s", text
@@ -198,12 +188,14 @@ Error
  - MMDVM.status.val=14
 
 Lockout
+
 - page MMDVM
  - MMDVM.status.val=1
 - t0.txt="LOCKOUT"
 - MMDVM.status.val=15
 
 Quit
+
 - page MMDVM
  - MMDVM.status.val=1
 - t3.txt="%s", m_ipaddress
@@ -212,6 +204,7 @@ Quit
  - MMDVM.status.val=19
 
 **DStar**
+
 - page DSTAR
  - MMDVM.status.val=2
 - t0.txt="%s %.8s/%4.4s", type, my1, my2
@@ -227,10 +220,12 @@ DStar RSSI
  - MMDVM.status.val=47
 
 DStar BER
+
 - t4.txt="%.1f%%", m_berAccum1 / float(DSTAR_BER_COUNT)
  - MMDVM.status.val=48
 
 DStar Clear
+
 - t0.txt="Listening"
  - MMDVM.status.val=41
 - t1.txt=""
@@ -240,12 +235,30 @@ DStar Clear
 
 
 **DMR**
+
 - page DMR
  - MMDVM.status.val=3
 
-TS - Listening - ID - TA - CallEnd - More
-1 | 61 | 62 | 63 | 64 | 65
-2 | 69 | 70 | 71 | 72 | 73
+status codes
+
+| TS | Listening | ID | TA | CallEnd | TG | RSSI | BER |
+|---|---|---|---|---|---|---|---|
+| 1 | 61 | 62 | 63 | 64 | 65 | 66 | 67 |
+| 2 | 69 | 70 | 71 | 72 | 73 | 74 | 75 |
+
+t variables
+
+| TS | ID | TG | RSSI | BER |
+|---|---|---|---|---|
+| 1 | t0 | t1 | t4 | t6 |
+| 2 | t2 | t3 | t5 | t7 |
+
+t variables [extended nextiondriver]
+
+| TS | TG | data1 | data2 | data3 | data4 | data5 |
+|---|---|---|---|---|---|---|
+| 1 | t9 | t18 | t19 | t20 | T21 | t22 |
+| 2 | t8 | t13 | t14 | t15 | t16 | t17 |
 
 - t0.pco=0
 - t0.font=4
@@ -257,7 +270,7 @@ TS - Listening - ID - TA - CallEnd - More
 - t2.txt="2 Listening"
  - MMDVM.status.val=69
 
-- t0.txt="1 %s %s", type, src
+- t0.txt="1 %s %s", type, src  //type is 'R'F or 'N'etwork
 - t0.pco=0
 - t0.font=4
  - MMDVM.status.val=70
@@ -280,14 +293,16 @@ DMR RSSI
 - t5.txt="-%udBm", m_rssiAccum2 / DMR_RSSI_COUNT
  - MMDVM.status.val=74
 
-DMR TA    (Note this is integer)
-- t0.pco=33808
+DMR TA    
+
+- t0.pco=33808 //integers
  - MMDVM.status.val=64
+
 - t2.pco=33808
  - MMDVM.status.val=72
 
 - t0.txt="1 %s %s", type, talkerAlias
-- t0.font=3
+- t0.font=3 // code adjusts based on length
 - t0.font=2
 - t0.font=1
 - t0.pco=1024"
@@ -310,6 +325,7 @@ DMR BER
 
 
 DMR Clear
+
 - t0.txt="1 Listening"
  - MMDVM.status.val=61
 - t0.pco=0
@@ -328,8 +344,14 @@ DMR Clear
 
 
 **YSF**
+
 - page YSF
  - MMDVM.status.val=4
+
+| Clear | Type | Dest | Origin | RSSI | BER |
+|---|---|---|---|---|---|
+| 81 | 82 | 83 | 84 | 85 | 86 |
+
 - dim=%u", m_brightness
 - t0.txt="%s %.10s", type, source
  - MMDVM.status.val=82
@@ -340,14 +362,17 @@ DMR Clear
   - MMDVM.status.val=84
 
 Fusion RSSI
+
  - t3.txt="-%udBm", m_rssiAccum1 / YSF_RSSI_COUNT
  -  MMDVM.status.val=85
 
 Fusion BER
+
 - t4.txt="%.1f%%", m_berAccum1 / float(YSF_BER_COUNT)
  - MMDVM.status.val=86
 
 Fusion Clear
+
 - t0.txt="Listening"
  - MMDVM.status.val=81
 - t1.txt=""
@@ -356,8 +381,14 @@ Fusion Clear
 - t4.txt=""
 
 **P25**
+
 - page P25
  - MMDVM.status.val=5
+
+ | Clear | Group | Dest | RSSI | BER |
+ |---|---|---|---|---|
+ | 101 | 102 | 103 | 104 | 105 |
+
 - dim=%u", m_brightness
 - t0.txt="%s %.10s", type, source
  - MMDVM.status.val=102
@@ -366,14 +397,17 @@ Fusion Clear
  - MMDVM.status.val=103
 
 P25 RSSI
+
 - t2.txt="-%udBm", m_rssiAccum1 / P25_RSSI_COUNT
  - MMDVM.status.val=104
 
 P25 BER
+
 - t3.txt="%.1f%%", m_berAccum1 / float(P25_BER_COUNT)
  - MMDVM.status.val=105
 
 P25 Clear
+
 - t0.txt="Listening"
  - MMDVM.status.val=101
 - t1.txt=""
@@ -381,8 +415,15 @@ P25 Clear
 - t3.txt=""
 
 **NXDN**
+
 - page NXDN"
  - MMDVM.status.val=6
+
+ | Clear | Type | Group | RSSI | BER |
+ |---|---|---|---|---|
+ | 121 | 122 | 123 | 124 | 125 |
+
+
 - dim=%u", m_brightness
 - t0.txt="%s %.10s", type, source
  - MMDVM.status.val=122
@@ -395,10 +436,12 @@ NXDN RSSI
   - MMDVM.status.val=124
 
 NXDN BER
+
 - t3.txt="%.1f%%", m_berAccum1 / float(NXDN_BER_COUNT)
  - MMDVM.status.val=125
 
 NXDN Clear
+
 - t0.txt="Listening"
  - MMDVM.status.val=121
 - t1.txt=""
@@ -406,8 +449,10 @@ NXDN Clear
 - t3.txt=""
 
 **POCSAG**
+
 - page POCSAG"
  - MMDVM.status.val=7
+
 - dim=%u", m_brightness
 - t0.txt="RIC: %u", ric
  - MMDVM.status.val=132
@@ -415,6 +460,7 @@ NXDN Clear
  - MMDVM.status.val=133
 
 POCSAG Clear
+
 - t0.txt="Waiting"
  - MMDVM.status.val=134
 - t1.txt=""

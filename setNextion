@@ -73,7 +73,7 @@ usage () {
 		}
 	fi
 	newfile=$NEXTDIR"Switcher"$SCRMODE"_"$SCRSIZE"_"$SCRTYPE".tft"
-	nextnew=$NEXTDIR$NMODEL$NSCRTYPE$NSIZE".tft"
+	nextnew=$NMODEL$NSCRTYPE$NSIZE".tft"
 	if [ -f $newfile ] ; then {
 		rm $CONFDIR/Switcher.tft
 		ln -s $newfile $CONFDIR/Switcher.tft

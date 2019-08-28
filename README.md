@@ -4,6 +4,10 @@ Originally developed to support Nextion touch screen change.
 Lots to do
 Relies on functionality of NextionDriver by ON7LDS
 
+## Aug 19 Screen development is being done in Nextion 0.53 LTS version I had a quick try with 0.58 and everything blew up!
+
+
+
 1.1.1 28Aug19 - minor script change for setNextion
 1.1.0 25Dec18
 

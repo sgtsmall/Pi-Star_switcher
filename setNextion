@@ -2,6 +2,7 @@
 #set up a particular screen for loadNextion
 # experiments with nextiondriver load
 CONFDIR=/home/pi-star/configs
+DATADIR=/usr/local/etc
 NEXTDIR=/home/pi-star/Pi-Star_switcher/Nextion/
 VERSION="1.1.0 228Aug19"
 version () {
@@ -72,11 +73,11 @@ usage () {
 		}
 	fi
 	newfile=$NEXTDIR"Switcher"$SCRMODE"_"$SCRSIZE"_"$SCRTYPE".tft"
-	nextnew=$NEXTDIR$NMODEL$SCRTYPE$NSIZE".tft"
+	nextnew=$NEXTDIR$NMODEL$NSCRTYPE$NSIZE".tft"
 	if [ -f $newfile ] ; then {
 		rm $CONFDIR/Switcher.tft
 		ln -s $newfile $CONFDIR/Switcher.tft
-		ln -s $newfile $CONFDIR/$nextnew
+		sudo ln -s $newfile $DATADIR/$nextnew
 		}
 	fi
 	returncurr

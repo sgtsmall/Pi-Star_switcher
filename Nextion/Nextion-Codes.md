@@ -32,8 +32,8 @@ All 'MMDVM.status.val=*n*' also sends 'click S0,1'
 - TA Talker Alias data is sent by some radios on some networks so you usually end up with just the ID in this field.
 [Roger VK3KYY detailed blog about Talker Alias](https://www.rogerclark.net/dmr-talker-alias/)
 - The biggest problem at the moment is occasionally I miss the switch over from standby (Page 0) to DMR (page 1) or in my case one of 4 different DMR pages, from then on the data on the front screen may be mangled.
-I am looking at adding extra logic, if page 0 sees a status value belonging somewhere else it will jump to that page. It should start picking things up from there.
-
+- NextionDriver does not block data from mmdvmhost, consequently you can get some values from Pi-star then some values from NextionDriver including their status code then the rest of the mmdvmhost data and status code.
+ - this gets trickier on the Dual Host where a conversation is receiving from Slot 2 and sending on slot 1. 
 
 ### Extra Fields With on7lds nextiondriver
 
@@ -77,7 +77,7 @@ bco and pco are colour change values, this lets you set red/green etc.
 #define pcoDIS	46486
 
 |Type|Net|DSTAR|DMR |YSF |P25 |spare|NXDN|
-|----|---|-----|----|----|----|----|----|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |Mode|   | A1  | A2 | A3 | A4 | A5 | A6 |
 |link| N0| N1  | N2 | N3 |N4  | N5 | N6 |
 
@@ -206,6 +206,11 @@ Quit
 
 **DStar**
 
+| Clear | Type | Dest | Origin | RSSI | BER |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| 41 | 42 | 45 | 46 | 47 | 48 |
+|len|16?|8|12|6|5|
+
 - page DSTAR
  - MMDVM.status.val=2
 - t0.txt="%s %.8s/%4.4s", type, my1, my2
@@ -243,24 +248,25 @@ DStar Clear
 status codes
 
 | TS | Listening | ID | TA | CallEnd | TG | RSSI | BER |
-|---|---|---|---|---|---|---|---|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | 1 | 61 | 62 | 63 | 64 | 65 | 66 | 67 |
 | 2 | 69 | 70 | 71 | 72 | 73 | 74 | 75 |
 
 t variables
 
 | TS | ID | TG | RSSI | BER |
-|---|---|---|---|---|
+|:-:|:-:|:-:|:-:|:-:|
 | 1 | t0 | t1 | t4 | t6 |
 | 2 | t2 | t3 | t5 | t7 |
 | len | 8 | 8? | 5 | 6 |
 
 t variables [extended nextiondriver]
 
-| TS | TG | data1 | data2 | data3 | data4 | data5 |status|
-|---|---|---|---|---|---|---|--|
-| 1 | t9 | t18 | t19 | t20 | T21 | t22 |  68
+| TS | TG | data1 | data2 | data3 | data4 | data5 |statuscode|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 1 | t9 | t18 | t19 | t20 | T21 | t22 | 68
 | 2 | t8 | t13 | t14 | t15 | t16 | t17 | 78
+|len| x?|x?|x?|x?|x?|x?||
 |   |   | Callsign|Name|City|State|Blank||
 
 - t0.pco=0
@@ -352,8 +358,9 @@ DMR Clear
  - MMDVM.status.val=4
 
 | Clear | Type | Dest | Origin | RSSI | BER |
-|---|---|---|---|---|---|
+|:-:|:-:|:-:|:-:|:-:|:-:|
 | 81 | 82 | 83 | 84 | 85 | 86 |
+|len|12?|10|13|6|5|
 
 - dim=%u", m_brightness
 - t0.txt="%s %.10s", type, source
@@ -389,8 +396,9 @@ Fusion Clear
  - MMDVM.status.val=5
 
  | Clear | Group | Dest | RSSI | BER |
- |---|---|---|---|---|
+ |:-:|:-:|:-:|:-:|:-:|
  | 101 | 102 | 103 | 104 | 105 |
+ |len|12?|16?|6|5|
 
 - dim=%u", m_brightness
 - t0.txt="%s %.10s", type, source
@@ -423,8 +431,9 @@ P25 Clear
  - MMDVM.status.val=6
 
  | Clear | Type | Group | RSSI | BER |
- |---|---|---|---|---|
+ |:-:|:-:|:-:|:-:|:-:|
  | 121 | 122 | 123 | 124 | 125 |
+ |len|12?|16?|6|5|
 
 
 - dim=%u", m_brightness

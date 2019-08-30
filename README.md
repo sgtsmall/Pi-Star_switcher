@@ -8,7 +8,7 @@ Relies on functionality of NextionDriver by ON7LDS
 
 
 
-1.1.1 28Aug19 - minor script change for setNextion
+1.1.1 28Aug19 - minor script change for setNextion initial testing on Pi-Star 4.1 Beta is all good.
 1.1.0 25Dec18
 
 

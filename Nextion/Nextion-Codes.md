@@ -33,7 +33,53 @@ All 'MMDVM.status.val=*n*' also sends 'click S0,1'
 [Roger VK3KYY detailed blog about Talker Alias](https://www.rogerclark.net/dmr-talker-alias/)
 - The biggest problem at the moment is occasionally I miss the switch over from standby (Page 0) to DMR (page 1) or in my case one of 4 different DMR pages, from then on the data on the front screen may be mangled.
 - NextionDriver does not block data from mmdvmhost, consequently you can get some values from Pi-star then some values from NextionDriver including their status code then the rest of the mmdvmhost data and status code.
- - this gets trickier on the Dual Host where a conversation is receiving from Slot 2 and sending on slot 1. 
+ - this gets trickier on the Dual Host where a conversation is receiving from Slot 2 and sending on slot 1.
+- Initial testing on pi-star 4.1rc-02, MMDVM.status.val=20 (temp) does not update after initial send so code that swaps to the info page after counting several of these does not function. - to be investigated. Also ShowModesStatus not working ?
+
+## logging -
+
+nextiondriver uses LogLevel=[0-4] in the [NextionDriver] section of /etc/mmdvmhost and then uses syslog.
+~~~
+[NextionDriver]
+Port=/dev/ttyUSB0
+LogLevel=4
+DataFilesPath=/usr/local/etc/
+GroupsFile=groups.txt
+DMRidFile=stripped.csv
+removeDim=0
+SleepWhenInactive=600
+ShowModesStatus=1
+~~~
+
+- running default level at 2 is probably good idea. Need 4 for debug.
+  * 0 - LOG_WARNING
+  * 1 - LOG_ERR
+  * 2 - LOG_NOTICE
+  * 3 - LOG_INFO
+  * 4 - LOG_DEBUG
+
+
+mmdvmhost uses different logging, also params for file level and display level.
+
+~~~
+[Log]
+DisplayLevel=0
+FileLevel=2
+FilePath=/var/log/pi-star
+FileRoot=MMDVM
+~~~
+
+- set displaylevel = 0 to stop debug info on the nextion port.
+- set file level=2 for most messages, =1 for debug.
+  * 0 no logging
+  * 1 [D]debug level logging
+  * 2 [M]essage
+  * 3 [I]nformaton
+  * 4 [W]arning
+  * 5 [E]rror
+  * 6 [F]atal
+
+
 
 ### Extra Fields With on7lds nextiondriver
 

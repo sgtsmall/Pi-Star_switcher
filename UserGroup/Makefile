@@ -19,6 +19,7 @@ clean:
 update:
 	"${MAKE}" clean
 	"${MAKE}" stripped.csv
+	"${MAKE}" TGList_BM.txt
 	sudo "${MAKE}" install
 
 #This strips out all unicode characters.
@@ -40,7 +41,7 @@ newuser.tmp:
 
 TGList_BM.txt: newtglist.tmp
 	swupdatetg -u $^
-	( head -n 10 $^ )| sort -n -o $@
+	( head -n 10 $^ && tail -n +11 $^ | sort -n) > $@
 newtglist.tmp:
 	curl  $(CURL_FLAGS) -o $@ "http://www.pistar.uk/downloads/TGList_BM.txt"
 

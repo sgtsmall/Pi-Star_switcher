@@ -35,7 +35,8 @@ usage () {
  exit 0
 }
 
-
+mand=
+if [ "$1" != "" ]; then
  # for future state with multiple options
  while getopts "lhvs:t:m:" opt ; do
    case $opt in
@@ -88,5 +89,7 @@ usage () {
 	usage;
  }
  fi
-
+else
+	usage
+fi
  #  $* is left over

@@ -5,12 +5,12 @@
 #
 # DO NOT RUN via Nextion .. the stop of mmdvmhost will stop NExtionDriver killing the job
 #
-
+PREFIX=/usr/local/sbin
 HOMEDIR=/home/pi-star
 CONFDIR=/home/pi-star/configs
 GITHOME=$HOMEDIR/Pi-Star_switcher
 PISTUPDATE=/usr/local/sbin/pistar-update
-VERSION="0.1.1rc2 19Nov18"
+VERSION="1.0 30Aug19"
 version () {
  msg="Version: $(basename $0) $VERSION"
  returnmsg
@@ -54,5 +54,6 @@ if [ -n "$overwrite" ] ; then
   sleep 2
   sudo make install
   sleep 1
+  sudo $PREFIX/swstopstart restart
   exit 0
 fi

@@ -23,10 +23,11 @@ BEGIN {
     S = " "
 print "{"
 }
-{
-NR>10
+
+NR > 10 {
 printf "    \"%s\": \"%s\",\n",trim($1), trimtg($3)
 }
+
 END {
 print "}"
 }

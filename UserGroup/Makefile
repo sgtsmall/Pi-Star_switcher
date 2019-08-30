@@ -20,6 +20,7 @@ update:
 	"${MAKE}" clean
 	"${MAKE}" stripped.csv
 	"${MAKE}" TGList_BM.txt
+	"${MAKE}" groups.txt
 	sudo "${MAKE}" install
 
 #This strips out all unicode characters.
@@ -40,7 +41,7 @@ newuser.tmp:
 	curl  $(CURL_FLAGS) -o $@ "https://www.radioid.net/static/user.csv"
 
 groups.txt: TGList_BM.txt
-	awk -F, -f groupxx.awk
+	awk -F, -f groupxx.awk $^ >$@
 
 TGList_BM.txt: newtglist.tmp
 	swupdatetg -u $^

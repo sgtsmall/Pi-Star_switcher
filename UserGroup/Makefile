@@ -41,7 +41,7 @@ newuser.tmp:
 	curl  $(CURL_FLAGS) -o $@ "https://www.radioid.net/static/user.csv"
 
 groups.txt: TGList_BM.txt
-	awk -F, -f groupxx.awk $^ >$@
+	awk -F, -f groupclean.awk $^ >$@
 
 TGList_BM.txt: newtglist.tmp
 	swupdatetg -u $^

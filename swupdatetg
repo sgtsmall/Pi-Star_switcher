@@ -32,30 +32,29 @@ usage () {
    exit 0
  }
 
- #starting
- mand=
- if [ "$1" != "" ]; then
-  updatetglist=
-  tglist=
+#starting
+mand=
+if [ "$1" != "" ]; then
+ updatetglist=
+ tglist=
 
-  # for future state with multiple options
-  while getopts "hu:" opt ; do
-    case $opt in
+ # for future state with multiple options
+ while getopts "hu:" opt ; do
+   case $opt in
 
-      h ) usage ;;
-      u ) tglist="$OPTARG" ; updatetglist=1 ;;
+     h ) usage ;;
+     u ) tglist="$OPTARG" ; updatetglist=1 ;;
 
-     \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
-    esac
+    \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
+   esac
   done
   shift $(($OPTIND -1))
   #  $* is left over
- else
-  usage
- fi
+else
+ usage
+fi
 
 if [ -n "$updatetglist" ] ; then
-	{
 	TGfixer 5 '0;Regional 5;TG5' $tglist
 	TGfixer 30 '0;JOTA 30;TG30' $tglist
 	TGfixer 95 '0;Australia and NZ;TG95' $tglist
@@ -75,4 +74,4 @@ if [ -n "$updatetglist" ] ; then
 	TGfixer 3808 '0;VK8 Northern Ter;TG3808' $tglist
 	TGfixer 3809 '0;VK UA Talk;TG3809' $tglist
 	TGfixer 3810 '0;VK UA WICEN;TG3810' $tglist
-}
+fi

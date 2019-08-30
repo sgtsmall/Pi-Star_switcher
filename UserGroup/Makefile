@@ -40,7 +40,7 @@ newuser.tmp:
 
 TGList_BM.txt: newtglist.tmp
 	swupdatetg -u $^
-	( head -n 10 $^ )| sort -n -0 $@
+	( head -n 10 $^ )| sort -n -o $@
 newtglist.tmp:
 	curl  $(CURL_FLAGS) -o $@ "http://www.pistar.uk/downloads/TGList_BM.txt"
 

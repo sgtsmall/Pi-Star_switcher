@@ -1,0 +1,78 @@
+#!/bin/bash
+#set up a particular screen for loadNextion
+# experiments with nextiondriver load
+CONFDIR=/home/pi-star/configs
+DATADIR=/usr/local/etc
+NEXTDIR=/home/pi-star/Pi-Star_switcher/Nextion/
+VERSION="1.1.0 228Aug19"
+version () {
+ msg="Version: $(basename $0) $VERSION"
+ returnmsg
+ exit 0
+}
+returnmsg () {
+  echo $msg
+}
+# call option with parameters: $1=TGnum $2=TGstring
+function TGfixer() {
+    TGnum=${1//\//\\/}
+    TGName=${2//\//\\/}
+    TGlist=$3
+    sed -i \
+        -e '/^#\?\(\s*'"${TGnum}"'\s*\;\s*\).*/{s//\1'"${TGName}"'/;:a;n;ba;q}' \
+        -e '$a'"${TGnum}"';'"${TGName}" $3
+}
+
+usage () {
+ echo "Usage: $(basename $0) [ -u listfile ][-h] "
+ echo ""
+ echo "      -u TGList_BM.txt    update TGList_BM.txt"
+ echo "      -h  This help text"
+ echo " "
+   exit 0
+ }
+
+ #starting
+ mand=
+ if [ "$1" != "" ]; then
+  updatetglist=
+  tglist=
+
+  # for future state with multiple options
+  while getopts "hu:" opt ; do
+    case $opt in
+
+      h ) usage ;;
+      u ) tglist="$OPTARG" ; updatetglist=1 ;;
+
+     \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
+    esac
+  done
+  shift $(($OPTIND -1))
+  #  $* is left over
+ else
+  usage
+ fi
+
+if [ -n "$updatetglist" ] ; then
+	{
+	TGfixer 5 '0;Regional 5;TG5' $tglist
+	TGfixer 30 '0;JOTA 30;TG30' $tglist
+	TGfixer 95 '0;Australia and NZ;TG95' $tglist
+	TGfixer 113 '0;English 1;TG113' $tglist
+	TGfixer 123 '0;123;TG123' $tglist
+	TGfixer 133 '0;US 3;TG133' $tglist
+	TGfixer 143 '0;UK WiresX CQ-UK;TG143' $tglist
+	TGfixer 153 '0;South Pacific 4851;TG153' $tglist
+
+	TGfixer 3801 '0;VK1 ACT;TG3801' $tglist
+	TGfixer 3802 '0;VK2 NSW;TG3802' $tglist
+	TGfixer 3803 '0;VK3 Victoria;TG3803' $tglist
+	TGfixer 3804 '0;VK4 Queensland;TG3804' $tglist
+	TGfixer 3805 '0;VK5 South Aust;TG3805' $tglist
+	TGfixer 3806 '0;VK6 West Aust;TG3806' $tglist
+	TGfixer 3807 '0;VK7 Tasmania;TG3807' $tglist
+	TGfixer 3808 '0;VK8 Northern Ter;TG3808' $tglist
+	TGfixer 3809 '0;VK UA Talk;TG3809' $tglist
+	TGfixer 3810 '0;VK UA WICEN;TG3810' $tglist
+}

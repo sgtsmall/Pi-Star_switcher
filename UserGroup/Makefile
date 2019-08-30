@@ -39,8 +39,8 @@ newuser.tmp:
 	curl  $(CURL_FLAGS) -o $@ "https://www.radioid.net/static/user.csv"
 
 TGList_BM.txt: newtglist.tmp
-	swupdatetg $^
-      ( head -n 10 $^ )| sort -n -0 $@
+	swupdatetg -u $^
+	( head -n 10 $^ )| sort -n -0 $@
 newtglist.tmp:
 	curl  $(CURL_FLAGS) -o $@ "http://www.pistar.uk/downloads/TGList_BM.txt"
 

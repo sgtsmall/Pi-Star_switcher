@@ -11,10 +11,10 @@ ICONV=iconv -c -f UTF-8 -t ascii//TRANSLIT
 .PHONY: all update clean install
 
 #all: stripped.csv repeaters.csv users.json repeaters.json
-all: stripped.csv TGList_BM.txt
+all: stripped.csv TGList_BM.txt groups.txt
 
 clean:
-	rm -f repeaters.csv users.json repeaters.json special_IDs.csv *.tmp stripped.csv TGList_BM.txt
+	rm -f repeaters.csv users.json repeaters.json special_IDs.csv *.tmp stripped.csv TGList_BM.txt groups.txt
 
 update:
 	"${MAKE}" clean
@@ -25,8 +25,8 @@ update:
 #This strips out all unicode characters.
 #We'd rather just drop the accents.
 
-custom.csv: groups.txt
-	awk -F: -f groupcustom.awk $^ > $@
+#custom.csv: groups.txt
+#	awk -F: -f groupcustom.awk $^ > $@
 
 #stripped.csv: custom.csv special.tmp fixed.csv dmrmarc2.tmp reflector.tmp
 stripped.csv: custom.csv reorder.tmp
@@ -38,6 +38,9 @@ reorder.tmp: newuser.tmp
 
 newuser.tmp:
 	curl  $(CURL_FLAGS) -o $@ "https://www.radioid.net/static/user.csv"
+
+groups.txt: TGList_BM.txt
+	awk -F, -f groupxx.awk
 
 TGList_BM.txt: newtglist.tmp
 	swupdatetg -u $^

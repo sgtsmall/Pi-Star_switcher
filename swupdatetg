@@ -55,23 +55,41 @@ else
 fi
 
 if [ -n "$updatetglist" ] ; then
-	TGfixer 5 '0;Regional 5;TG5' $tglist
-	TGfixer 30 '0;JOTA 30;TG30' $tglist
-	TGfixer 95 '0;Australia and NZ;TG95' $tglist
-	TGfixer 113 '0;English 1;TG113' $tglist
-	TGfixer 123 '0;123;TG123' $tglist
-	TGfixer 133 '0;US 3;TG133' $tglist
-	TGfixer 143 '0;UK WiresX CQ-UK;TG143' $tglist
-	TGfixer 153 '0;South Pacific 4851;TG153' $tglist
+	TGfixer 5 '0;Regional_5_TG5;TG5' $tglist
+	TGfixer 30 '0;JOTA_30_TG30;TG30' $tglist
+	TGfixer 95 '0;Australia_and_NZ_TG95;TG95' $tglist
+	TGfixer 113 '0;English_1;TG113' $tglist
+	TGfixer 123 '0;123_TG123;TG123' $tglist
+	TGfixer 133 '0;US_3_TG133;TG133' $tglist
+	TGfixer 143 '0;UK_WiresX_CQ-UK_TG143;TG143' $tglist
+	TGfixer 153 '0;South_Pacific_4851_TG153;TG153' $tglist
+	TGfixer 202 '0;Greek_International_TG202;TG202' $tglist
+	TGfixer 2021 '0;Greek_National_R1_TG2021;TG2021' $tglist
+	TGfixer 2022 '0;Greek_National_R1_TG2022;TG2022' $tglist
+	TGfixer 2023 '0;Greek_National_R1_TG2023;TG2023' $tglist
+	TGfixer 2024 '0;Greek_National_R1_TG2024;TG2024' $tglist
+	TGfixer 2025 '0;Greek_National_R1_TG2025;TG2025' $tglist
+	TGfixer 2026 '0;Greek_National_R1_TG2026;TG2026' $tglist
+	TGfixer 2027 '0;Greek_National_R1_TG2027;TG2027' $tglist
+	TGfixer 2028 '0;Greek_National_R1_TG2028;TG2028' $tglist
+	TGfixer 2029 '0;Greek_National_R1_TG2029;TG2029' $tglist
+	TGfixer 2081 '0;France_Ile_DE_FRANCE_TG2081;TG2081' $tglist
+	TGfixer 2082 '0;France_NorthWest_TG2082;TG2082' $tglist
+	TGfixer 2083 '0;France_NorthEast_TG2083;TG2083' $tglist
+	TGfixer 2084 '0;France_SouthWest_TG2084;TG2084' $tglist
+	TGfixer 2085 '0;France_SouthEast_TG2085;TG2085' $tglist
+	TGfixer 2083 '0;Greek_National_R1_TG2029;TG2029' $tglist
+	TGfixer 2084 '0;Greek_National_R1_TG2029;TG2029' $tglist
+	TGfixer 2085 '0;Greek_National_R1_TG2029;TG2029' $tglist
 
-	TGfixer 3801 '0;VK1 ACT;TG3801' $tglist
-	TGfixer 3802 '0;VK2 NSW;TG3802' $tglist
-	TGfixer 3803 '0;VK3 Victoria;TG3803' $tglist
-	TGfixer 3804 '0;VK4 Queensland;TG3804' $tglist
-	TGfixer 3805 '0;VK5 South Aust;TG3805' $tglist
-	TGfixer 3806 '0;VK6 West Aust;TG3806' $tglist
-	TGfixer 3807 '0;VK7 Tasmania;TG3807' $tglist
-	TGfixer 3808 '0;VK8 Northern Ter;TG3808' $tglist
-	TGfixer 3809 '0;VK UA Talk;TG3809' $tglist
-	TGfixer 3810 '0;VK UA WICEN;TG3810' $tglist
+	TGfixer 3801 '0;VK1_ACT_TG3801;TG3801' $tglist
+	TGfixer 3802 '0;VK2_NSW_TG3802;TG3802' $tglist
+	TGfixer 3803 '0;VK3_Victoria_TG3803;TG3803' $tglist
+	TGfixer 3804 '0;VK4_Queensland_TG3804;TG3804' $tglist
+	TGfixer 3805 '0;VK5_South_Aust_TG3805;TG3805' $tglist
+	TGfixer 3806 '0;VK6_West_Aust_TG3806;TG3806' $tglist
+	TGfixer 3807 '0;VK7_Tasmania_TG3807;TG3807' $tglist
+	TGfixer 3808 '0;VK8_Northern_Ter_TG3808;TG3808' $tglist
+	TGfixer 3809 '0;VK_UA_Talk_TG809;TG3809' $tglist
+	TGfixer 3810 '0;VK_UA_WICEN_TG3810;TG3810' $tglist
 fi

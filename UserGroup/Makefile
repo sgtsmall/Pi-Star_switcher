@@ -40,6 +40,9 @@ reorder.tmp: newuser.tmp
 newuser.tmp:
 	curl  $(CURL_FLAGS) -o $@ "https://www.radioid.net/static/user.csv"
 
+newdmrids.tmp:
+	curl  $(CURL_FLAGS) -o $@ "http://www.pistar.uk/downloads/DMRIds.dat"
+
 groups.txt: TGList_BM.txt
 	awk -F, -f groupclean.awk $^ >$@
 

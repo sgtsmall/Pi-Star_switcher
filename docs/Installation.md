@@ -43,17 +43,6 @@ then reboot
 
 ### raspberry pi zero (Jumbospot, and similar builds)
 
-```
-rpi-rw
-cd /tmp
-git clone https://github.com/on7lds/NextionDriverInstaller.git
-sudo NextionDriverInstaller/install.sh
-```
-
-Install the NextionDriver in the home folder to have access to sample filesystem
-
-
-Now install this software
 
 ```
 rpi-rw
@@ -65,8 +54,8 @@ sudo make install-list
 sudo make install-user  
 swupdateuser  
 cd
-
 ```
+
 FYI
 - "install-list" generates a list of sub programs that pi-star has installed
 - "install-user" loads initial set of groups and users that are used in the display
@@ -75,20 +64,20 @@ FYI
 
 
 Help for options is available
-```switcher -h```
+
+``switcher -h``
 
 
-For updates
+For updates use
 
-```
-rpi-rw
-cd Pi-Star_switcher
-git pull origin master
-sudo make install
-```
+``switcher -U -O``
 
 
-### Pi-Star - mobile
+### Now proceed with the Nextion Display install
+
+[docs/Installer-Nextion.md]
+
+### Optional - Pi-Star - mobile
 
 these are great mobile device web pages not sure of the future of these.
 

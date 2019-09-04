@@ -22,7 +22,7 @@ returncurr () {
 usage () {
  echo "Usage: $(basename $0) [ -h|-v|-l] [-s 32|35 -t B|E -m S|D]"
  echo ""
- echo "	-l list screens"
+ echo "     -l list screens"
  echo "     -s 35 -t B|E -m S|D"
  echo "     -h  This help text"
  echo "     -v   version"
@@ -40,7 +40,7 @@ if [ "$1" != "" ]; then
  # for future state with multiple options
  while getopts "lhvs:t:m:" opt ; do
    case $opt in
-     l ) ls -1 $NEXTDIR*.tft	;;
+     l ) ls -1 $NEXTDIR*.tft ; exit 0 ;;
      h ) usage ;;
      v ) version ;;
      s ) SCRSIZE="$OPTARG" ; oupdate=0 ;;

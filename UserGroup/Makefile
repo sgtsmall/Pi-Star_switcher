@@ -31,7 +31,7 @@ update:
 
 #stripped.csv: custom.csv special.tmp fixed.csv dmrmarc2.tmp reflector.tmp
 stripped.csv: custom.csv reorder.tmp
-	awk -F, -f combine.awk $^ | $(ICONV)  | sort -t ',' -k1g,1 | awk 'NR>3' >stripped.csv
+	awk -F, -f combine.awk $^ | $(ICONV)  | sort -t ',' -k1g,1 | awk 'NR>3' >$@ ; sed -s -i '1i\\' $@
 
 reorder.tmp: newuser.tmp
 ##	sed 's/:/,/g' $^ |sed 's/",/":/g'  |

@@ -1,0 +1,60 @@
+SYSTEM1(Page)
+Preinitialize Event
+
+//va10c0, va11c1, v113c2 init with 0,0,1 in MMDVM Page
+//h0.val=Info.cnt1.val
+c0.val=MMDVM.va10c0.val
+c1.val=MMDVM.va11c1.val
+c2.val=MMDVM.va13c2.val
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES
+
+
++++++++
+
+b0(Button)
+
+{MENU button}
+
+Touch Release Event
+page PAGES
+
++++++++
+
+c0(Checkbox)
+
+Touch Release Event
+
+//Auto Switch
+MMDVM.va10c0.val=c0.val
+
++++++++
+
+c1(Checkbox)
+
+Touch Release Event
+
+//DMR2
+MMDVM.va11c1.val=c1.val
+
++++++++
+
+c2(Checkbox)
+
+
+Touch Release Event
+
+//Extended Data
+MMDVM.va13c2.val=c2.val

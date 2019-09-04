@@ -1,0 +1,62 @@
+Info(Page)
+Preinitialize Event
+
+t0.txt=MMDVM.va0.txt
+t1.txt=MMDVM.va1.txt
+t2.txt=MMDVM.va2.txt
+t3.txt=MMDVM.va3.txt
+t20.txt=MMDVM.va4.txt
+t21.txt=MMDVM.va5.txt
+t22.txt=MMDVM.va6.txt
+t30.txt=MMDVM.va7.txt
+t31.txt=MMDVM.va8.txt
+t32.txt=MMDVM.va12.txt
+pr0.val=MMDVM.va9.val
+cnt0.val=0
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+tmp0.val=cpuload.val
+if(cpuload.val>100)
+{
+  tmp0.val=100
+}
+if(tmp0.val>80)
+{
+  pr0.pco=63488
+}else
+{
+  pr0.pco=1024
+}
+pr0.val=tmp0.val
+va0.txt=t0.txt
+va1.txt=t1.txt
+va2.txt=t2.txt
+va3.txt=t3.txt
+va4.txt=t20.txt
+va5.txt=t21.txt
+va6.txt=t22.txt
+va7.txt=t30.txt
+va8.txt=t31.txt
+va9.val=pr0.val
+va12.txt=t32.txt
+if(MMDVM.status.val==20)
+{
+  cnt0.val++
+}
+if(cnt0.val>cnt1.val)
+{
+  page MMDVM
+}
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES

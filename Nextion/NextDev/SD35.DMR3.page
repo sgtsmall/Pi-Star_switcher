@@ -1,0 +1,144 @@
+DMR3(Page)
+Preinitialize Event
+
+
+t0.txt=""
+t0bis.txt=""
+g0bis.txt=""
+t1bis.txt=""
+t1.txt=""
+t2.txt=""
+t2bis.txt=""
+g2bis.txt=""
+t3.txt=""
+t3bis.txt=""
+t4.txt=""
+t5.txt=""
+t6.txt=""
+t7.txt=""
+Info.cnt0.val=0
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+// the DMRID/TA field will be processed
+// depending on type (ID, TA, call end) color and font size are set
+//choose font size
+if(MMDVM.status.val==11)
+{
+  t0.txt=""
+  t1.txt=""
+  t2.txt=""
+  g0bis.txt=""
+  g2bis.txt=""
+  t3.txt=""
+  vis t3,1
+  t1bis.txt="IDLE"
+  t3bis.txt="IDLE"
+  t4.txt=""
+  t5.txt=""
+  t6.txt=""
+  t7.txt=""
+}
+t0.font=7
+t2.font=7
+strlen t0.txt,tmp0.val
+if(tmp0.val>29)
+{
+  t0.font=5
+}
+if(tmp0.val>40)
+{
+  t0.font=9
+}
+strlen t2.txt,tmp1.val
+if(tmp1.val>29)
+{
+  t2.font=5
+}
+if(tmp1.val>40)
+{
+  t2.font=9
+}
+//text color (for slot 1)
+if(MMDVM.status.val>60)
+{
+  if(MMDVM.status.val<65)
+  {
+    substr t0.txt,t0bis.txt,1,40
+    //status 61=listening, 62=ID, 63=TA, 64=call end
+    if(MMDVM.status.val==61)
+    {
+      t0bis.pco=0
+    }
+    //ID
+    if(MMDVM.status.val==62)
+    {
+      t0bis.pco=31
+    }
+    //TA
+    if(MMDVM.status.val==63)
+    {
+      t0bis.pco=1024
+    }
+    //Call end
+    if(MMDVM.status.val==64)
+    {
+      t0bis.pco=33808
+      if(t1bis.txt!=t1.txt)
+      {
+        t1bis.txt=t1.txt
+      }
+      if(g0bis.txt!=t0.txt)
+      {
+        g0bis.txt=t0.txt
+      }
+    }
+  }
+}
+//text color (for slot 2)
+if(MMDVM.status.val>68)
+{
+  if(MMDVM.status.val<73)
+  {
+    substr t2.txt,t2bis.txt,2,40
+    //status 69=listening, 70=ID, 71=TA, 72=call end
+    if(MMDVM.status.val==69)
+    {
+      t2bis.pco=0
+    }
+    //ID
+    if(MMDVM.status.val==70)
+    {
+      t2bis.pco=31
+    }
+    //TA
+    if(MMDVM.status.val==71)
+    {
+      t2bis.pco=1024
+    }
+    //Call end
+    if(MMDVM.status.val==72)
+    {
+      if(g2bis.txt!=t2.txt)
+      {
+        g2bis.txt=t2.txt
+      }
+      if(t3bis.txt!=t3.txt)
+      {
+        t3bis.txt=t3.txt
+      }
+    }
+  }
+}
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES

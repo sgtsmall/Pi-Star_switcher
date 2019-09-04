@@ -1,0 +1,226 @@
+DMR1(Page)
+Preinitialize Event
+
+
+t0.txt=""
+t0bis.txt=""
+t1.txt=""
+t2.txt=""
+t2bis.txt=""
+t3.txt=""
+t3bis.txt=""
+t4.txt=""
+t5.txt=""
+t6.txt=""
+t7.txt=""
+t8.txt=""
+t13.txt=""
+t14.txt=""
+t15.txt=""
+t13b.txt=""
+t14b.txt=""
+t15b.txt=""
+Info.cnt0.val=0
+
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+// the DMRID/TA field will be processed
+// depending on type (ID, TA, call end) color and font size are set
+//choose font size
+// set a local stat for Listening 61-69 and End 64-72
+lstat.val=MMDVM.status.val
+if(lstat.val<65)
+{
+  if(lstat.val>60)
+  {
+    lstat.val+=8
+  }
+}
+t0.font=0
+t2.font=0
+t2bis.font=7
+strlen t2.txt,tmp1.val
+if(tmp1.val>17)
+{
+  t2bis.font=6
+}
+if(tmp1.val>20)
+{
+  t2bis.font=5
+}
+if(tmp1.val>24)
+{
+  t2bis.font=4
+}
+t0bis.font=7
+strlen t0.txt,tmp1.val
+if(tmp1.val>17)
+{
+  t0bis.font=6
+}
+if(tmp1.val>20)
+{
+  t0bis.font=5
+}
+if(tmp1.val>24)
+{
+  t0bis.font=4
+}
+//text color (only for slot 1)
+//Hotspot DST field (slot 1 = t0)
+if(MMDVM.status.val>60)
+{
+  if(MMDVM.status.val<65)
+  {
+    //first remove slot nr
+    substr t0.txt,t0bis.txt,2,40
+    //set color:
+    //status 61=listening, 62=ID, 63=TA, 64=call end
+    if(MMDVM.status.val==61)
+    {
+      t0bis.pco=0
+    }
+    //ID
+    if(MMDVM.status.val==62)
+    {
+      t0bis.pco=31
+      t13.txt=t18.txt
+      t14.txt=t19.txt
+      t15.txt=t20.txt
+    }
+    //TA
+    if(MMDVM.status.val==63)
+    {
+      t0bis.pco=1024
+    }
+    //Call end
+    if(MMDVM.status.val==64)
+    {
+      t0bis.pco=33808
+    }
+  }
+}
+//text color (only for slot 2)
+//Hotspot DST field (slot 2 = t2)
+if(MMDVM.status.val>68)
+{
+  if(MMDVM.status.val<73)
+  {
+    //first remove slot nr
+    substr t2.txt,t2bis.txt,2,40
+    //set color:
+    //status 69=listening, 70=ID, 71=TA, 72=call end
+    if(MMDVM.status.val==69)
+    {
+      t2bis.pco=0
+    }
+    //ID
+    if(MMDVM.status.val==70)
+    {
+      t2bis.pco=31
+    }
+    //TA
+    if(MMDVM.status.val==71)
+    {
+      t2bis.pco=1024
+    }
+    //Call end
+    if(MMDVM.status.val==72)
+    {
+      t2bis.pco=33808
+    }
+  }
+}
+// If TG S 1 is received
+if(MMDVM.status.val==65)
+{
+  t3bis.txt=t1.txt
+  // and there also is a name:
+  // show name, not TG nr
+  if(t9.txt!="")
+  {
+    vis t3bis,0
+    vis t8,0
+    vis t9,1
+  }else
+  {
+    vis t8,0
+    vis t9,0
+    vis t3bis,1
+  }
+}
+// If TG is received
+if(MMDVM.status.val==73)
+{
+  t3bis.txt=t3.txt
+  // and there also is a name:
+  // show name, not TG nr
+  if(t8.txt!="")
+  {
+    vis t3bis,0
+    vis t9,0
+    vis t8,1
+  }else
+  {
+    vis t8,0
+    vis t9,0
+    vis t3bis,1
+  }
+}
+if(MMDVM.status.val==11)
+{
+  t0.txt=""
+  t0bis.txt=""
+  t1.txt=""
+  t2.txt=""
+  t2bis.txt=""
+  t3.txt=""
+  vis t8,0
+  vis t3,1
+  t3bis.txt="IDLE"
+  t4.txt=""
+  t5.txt=""
+  t6.txt=""
+  t7.txt=""
+  t8.txt=""
+  t13.txt=""
+  t14.txt=""
+  t15.txt=""
+}
+if(lstat.val==64) // Call End
+{
+  if(t13b.txt!=t13.txt)
+  {
+    t13b.txt=t13.txt
+    t14b.txt=t14.txt
+    t15b.txt=t15.txt
+    t13.txt=""
+    t14.txt=""
+    t15.txt=""
+  }
+}
+if(lstat.val==72) // Call End
+{
+  if(t13b.txt!=t13.txt)
+  {
+    t13b.txt=t13.txt
+    t14b.txt=t14.txt
+    t15b.txt=t15.txt
+    t13.txt=""
+    t14.txt=""
+    t15.txt=""
+  }
+}
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES

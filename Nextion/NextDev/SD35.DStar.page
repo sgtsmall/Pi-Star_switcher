@@ -1,0 +1,25 @@
+DStar(Page)
+Preinitialize Event
+
+
+t0.txt=""
+t1.txt=""
+t2.txt=""
+t3.txt=""
+t4.txt=""
+
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES

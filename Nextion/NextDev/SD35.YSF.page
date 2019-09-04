@@ -1,0 +1,20 @@
+YSF(Page)
+Preinitialize Event
+
+
+
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES

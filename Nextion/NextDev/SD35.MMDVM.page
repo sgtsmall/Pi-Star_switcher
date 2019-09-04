@@ -1,0 +1,105 @@
+MMDVM(Page)
+Preinitialize Event
+bkcmd=0
+t0.txt=MMDVM.va0.txt
+t1.txt=MMDVM.va1.txt
+t3.txt=MMDVM.va3.txt
+t20.txt=MMDVM.va4.txt
+t21.txt=MMDVM.va5.txt
+t22.txt=MMDVM.va6.txt
+t30.txt=MMDVM.va7.txt
+t31.txt=MMDVM.va8.txt
+t32.txt=MMDVM.va12.txt
+pr0.val=MMDVM.va9.val
+cnt0.val=0
+vis t21,0
+vis t22,0
+vis pr0,0
+
+++++++++
+
+S0(Touch Area)
+Touch Press Event
+
+checkstat.val=MMDVM.status.val
+if(checkstat.val>40) // Hail Mary to get to the right page
+{
+  if(checkstat.val<50)
+  {
+    page DStar
+  }else if(checkstat.val<80)
+  {
+    MMDVM.status.val=3
+  }else if(checkstat.val<90)
+  {
+    page YSF
+  }else if(checkstat.val<110)
+  {
+    page P25
+  }else if(checkstat.val<130)
+  {
+    // page NXDN
+  }else if(checkstat.val<140)
+  {
+    // page POCSAG
+  }
+}
+tmp0.val=cpuload.val
+if(cpuload.val>100)
+{
+  tmp0.val=100
+}
+if(tmp0.val>80)
+{
+  pr0.pco=63488
+}else
+{
+  pr0.pco=1024
+}
+pr0.val=tmp0.val
+va0.txt=t0.txt
+va1.txt=t1.txt
+if(MMDVM.status.val==16)
+{
+  va3.txt=t3.txt
+}
+va4.txt=t20.txt
+va5.txt=t21.txt
+va6.txt=t22.txt
+va7.txt=t30.txt
+va8.txt=t31.txt
+va12.txt=t32.txt
+va9.val=pr0.val
+if(MMDVM.status.val==19)
+{
+  t1.txt="" // because stop message is in t0
+}
+if(MMDVM.status.val==3)
+{
+  if(MMDVM.va13c2.val==0) // Extended data
+  {
+    if(MMDVM.va11c1.val==1) //screen type 1 or 2
+    {
+      page DMR4
+    }else
+    {
+      page DMR3
+    }
+  }else
+  {
+    if(MMDVM.va11c1.val==1)
+    {
+      page DMR2
+    }else
+    {
+      page DMR1
+    }
+  }
+}
+
+++++++++
+MMDVM p0(Picture)
+Touch Release Event
+
+
+page PAGES

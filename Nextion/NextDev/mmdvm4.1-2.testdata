@@ -1,0 +1,702 @@
+bkcmd=0
+MMDVM.status.val=0
+click S0,1
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="42.8 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="43.9 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page DMR
+MMDVM.status.val=3
+click S0,1
+t0.txt="1 Listening"
+MMDVM.status.val=61
+click S0,1
+dim=50
+t2.txt="2 N 4000"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG9"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="40.1 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page DMR
+MMDVM.status.val=3
+click S0,1
+t0.txt="1 Listening"
+MMDVM.status.val=61
+click S0,1
+dim=50
+t2.txt="2 R VK2PSF"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG4000"
+MMDVM.status.val=73
+click S0,1
+t5.txt="-47dBm"
+MMDVM.status.val=74
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK2HQR SHANE"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="39.0 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page DMR
+MMDVM.status.val=3
+click S0,1
+t0.txt="1 Listening"
+MMDVM.status.val=61
+click S0,1
+dim=50
+t2.txt="2 N KC3MZR DOUGLAS"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="37.9 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page DMR
+MMDVM.status.val=3
+click S0,1
+t0.txt="1 Listening"
+MMDVM.status.val=61
+click S0,1
+dim=50
+t2.txt="2 N VK4NSP SHAUN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="38.5 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page DMR
+MMDVM.status.val=3
+click S0,1
+t0.txt="1 Listening"
+MMDVM.status.val=61
+click S0,1
+dim=50
+t2.txt="2 N VK4DU GLENN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+dim=50
+t2.txt="2 N VK4DU GLENN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+dim=50
+t2.txt="2 N VK4NSP SHAUN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4DU GLENN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4NSP SHAUN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK2JGV GUNTER"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4DU GLENN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4NSP SHAUN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4DU GLENN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK2JGV GUNTER"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4NSP SHAUN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK2JGV GUNTER"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4NSP SHAUN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK2JGV GUNTER"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4NSP SHAUN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK2JGV GUNTER"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4NSP SHAUN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="37.9 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page DMR
+MMDVM.status.val=3
+click S0,1
+t0.txt="1 Listening"
+MMDVM.status.val=61
+click S0,1
+dim=50
+t2.txt="2 N VK3SLR ALLAN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="35.8 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page DMR
+MMDVM.status.val=3
+click S0,1
+t0.txt="1 Listening"
+MMDVM.status.val=61
+click S0,1
+dim=50
+t2.txt="2 N VK4JWT JOHN"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+dim=50
+t2.txt="2 N VK4LO LAURIE"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="35.8 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1
+page DMR
+MMDVM.status.val=3
+click S0,1
+t0.txt="1 Listening"
+MMDVM.status.val=61
+click S0,1
+dim=50
+t2.txt="2 N VK4NBL PETER"
+MMDVM.status.val=70
+click S0,1
+t3.txt="TG505"
+MMDVM.status.val=73
+click S0,1
+MMDVM.status.val=72
+click S0,1
+t2.txt="2 Listening"
+MMDVM.status.val=69
+click S0,1
+t3.txt=""
+t5.txt=""
+t7.txt=""
+page MMDVM
+MMDVM.status.val=1
+click S0,1
+dim=20
+t0.txt="VK2LJ/505202501"
+t4.txt="VK2LJ"
+t5.txt="505202501"
+MMDVM.status.val=17
+click S0,1
+t30.txt="441.1000"
+MMDVM.status.val=20
+click S0,1
+t32.txt="441.1000"
+MMDVM.status.val=21
+click S0,1
+t20.txt="35.8 °C"
+MMDVM.status.val=22
+click S0,1
+t31.txt="Sydney, QF56od"
+MMDVM.status.val=23
+click S0,1
+t1.txt="MMDVM IDLE"
+MMDVM.status.val=11
+click S0,1
+t3.txt="wlan0:192.168.1.151"
+MMDVM.status.val=16
+click S0,1

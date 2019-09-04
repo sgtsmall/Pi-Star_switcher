@@ -1,0 +1,261 @@
+DMR2(Page)
+Preinitialize Event
+
+
+//disable 25356 text 46486
+//enable  1472  text 0
+//error   55879
+vis S0,0
+vis t0,0
+vis t0bis,0
+vis t1,0
+vis t2,0
+vis t2bis,0
+vis t3,0
+vis t4,0
+vis t5,0
+vis t6,0
+vis t7,0
+vis t8,0
+vis t13,0
+vis t14,0
+vis t16,0
+vis t18,0
+vis t19,0
+vis t21,0
+l0.txt=""
+l1.txt=""
+l2.txt=""
+l3.txt=""
+l4.txt=""
+l5.txt=""
+l6.txt=""
+l7.txt=""
+l8.txt=""
+l9.txt=""
+l10.txt=""
+l11.txt=""
+t30.txt=MMDVM.va7.txt
+t32.txt=MMDVM.va12.txt
+
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+if(MMDVM.status.val==11)
+{
+  l0.txt="idle"
+}
+if(MMDVM.status.val<69)
+{
+  if(MMDVM.status.val>60)
+  {
+    //first remove slot nr
+    // for now disregard TA
+    //substr t0.txt,t0bis.txt,1,40
+    //set color:
+    //status 69=listening, 70=ID, 71=TA, 72=call end
+    if(MMDVM.status.val==61) //Listening for Network
+    {
+      l0.pco=0
+      clearTS1.val=1
+    }
+    if(MMDVM.status.val==64)  //Call End for RF
+    {
+      l0.pco=0
+      clearTS1.val=1
+    }
+    //ID
+    if(MMDVM.status.val==62)
+    {
+      // t0 : src1 id / call / TA
+      // t1 : dst
+      // t4 : rssi1
+      // t6 : ber1
+      // t9 : TG name
+      l0.pco=31
+      if(t0.txt!="1 Listening")
+      {
+        if(vaS1idtype.val<MMDVM.status.val)
+        {
+          tmp0.txt=t0.txt+"                              "
+          vaS1idtype.val=MMDVM.status.val
+          substr tmp0.txt,vaS1id.txt,2,35 //load up to 35 char of whatever id we have to vaS1id
+          l0.txt=vaS1id.txt+vaS1tg.txt+vaS1rssi.txt+vaS1BER.txt //for now take a chance same session
+        }
+      }
+    }
+    if(MMDVM.status.val==65)
+    {
+      tmp0.txt="1:"+t1.txt+"          "  //Slot plus TG
+      substr tmp0.txt,vaS1tg.txt,0,10 //load up to 35 char of whatever id we have to vaS1id
+      l0.txt=vaS1id.txt+vaS1tg.txt+vaS1rssi.txt+vaS1BER.txt //for now take a chance same session
+    }
+    if(MMDVM.status.val==66)
+    {
+      tmp0.txt=t4.txt+"       "  //Slot plus RSSI
+      substr tmp0.txt,vaS1rssi.txt,0,7 //load up to 35 char of whatever id we have to vaS1id
+      l0.txt=vaS1id.txt+vaS1tg.txt+vaS1rssi.txt+vaS1BER.txt //for now take a chance same session
+    }
+    if(MMDVM.status.val==67)
+    {
+      tmp0.txt=t6.txt+"       "  //Slot plus BER
+      substr tmp0.txt,vaS1BER.txt,0,6 //load up to 35 char of whatever id we have to vaS1id
+      l0.txt=vaS1id.txt+vaS1tg.txt+vaS1rssi.txt+vaS1BER.txt //for now take a chance same session
+    }
+    if(MMDVM.status.val==68)
+    {
+      if(t18.txt!="CALLSIGN")
+      {
+        if(vaS1idtype.val<MMDVM.status.val)
+        {
+          vaS1idtype.val=MMDVM.status.val
+          tmp0.txt=t18.txt+"        "
+          substr tmp0.txt,vaS1id.txt,0,9 // take 9 characters of User ID
+          tmp0.txt=t19.txt+"                      "
+          substr tmp0.txt,tmp1.txt,0,26 // take 26 characters of Name
+          vaS1id.txt+=tmp1.txt
+          l0.txt=vaS1id.txt+vaS1tg.txt+vaS1rssi.txt+vaS1BER.txt //for now take a chance same session
+        }
+      }
+    }
+    //TA
+    if(MMDVM.status.val==63)
+    {
+      l0.pco=1024
+    }
+    //Call end
+    if(clearTS1.val==1)
+    {
+      clearTS1.val=0
+      vaS1idtype.val=0
+      vaS1id.txt=""
+      vaS1tg.txt=""
+      vaS1rssi.txt=""
+      vaS1BER.txt=""
+      l0.pco=33808
+      l11.txt=l10.txt
+      l10.txt=l9.txt
+      l9.txt=l8.txt
+      l8.txt=l7.txt
+      l7.txt=l6.txt
+      l6.txt=l5.txt
+      l5.txt=l4.txt
+      l4.txt=l3.txt
+      l3.txt=l2.txt
+      l2.txt=l1.txt
+      l1.txt=l0.txt
+      l0.txt=t0.txt
+    }
+  }
+}
+if(MMDVM.status.val<79)
+{
+  if(MMDVM.status.val>68)
+  {
+    if(MMDVM.status.val==69)
+    {
+      l0.pco=0
+      clearTS2.val=1
+    }
+    if(MMDVM.status.val==72)
+    {
+      l0.pco=0
+      clearTS2.val=1
+    }
+    if(MMDVM.status.val==70)
+    {
+      // t2 : src1 id / call / TA
+      // t3 : dst
+      // t5 : rssi1
+      // t7 : ber1
+      // t8 : TG name
+      l0.pco=31
+      if(t2.txt!="2 Listening")
+      {
+        if(vaS2idtype.val<MMDVM.status.val)
+        {
+          tmp0.txt=t2.txt+"                              "
+          vaS2idtype.val=MMDVM.status.val
+          substr tmp0.txt,vaS2id.txt,2,35 //load up to 35 char of whatever id we have to vaS1id
+          l0.txt=vaS2id.txt+vaS2tg.txt+vaS2rssi.txt+vaS2BER.txt //for now take a chance same session
+        }
+      }
+    }
+    if(MMDVM.status.val==73)
+    {
+      tmp0.txt="2:"+t3.txt+"          "  //Slot plus TG
+      substr tmp0.txt,vaS2tg.txt,0,10 //load up to 35 char of whatever id we have to vaS1id
+      l0.txt=vaS2id.txt+vaS2tg.txt+vaS2rssi.txt+vaS2BER.txt //for now take a chance same session
+    }
+    if(MMDVM.status.val==74)
+    {
+      tmp0.txt=t5.txt+"      "  //Slot plus RSSI
+      substr tmp0.txt,vaS2rssi.txt,0,7 //load up to 35 char of whatever id we have to vaS1id
+      l0.txt=vaS2id.txt+vaS2tg.txt+vaS2rssi.txt+vaS2BER.txt //for now take a chance same session
+    }
+    if(MMDVM.status.val==75)
+    {
+      tmp0.txt=t7.txt+"      "  //Slot plus BER
+      substr tmp0.txt,vaS2BER.txt,0,6 //load up to 35 char of whatever id we have to vaS1id
+      l0.txt=vaS2id.txt+vaS2tg.txt+vaS2rssi.txt+vaS2BER.txt //for now take a chance same session
+    }
+    if(MMDVM.status.val==78)
+    {
+      if(t13.txt!="CALLSIGN")
+      {
+        if(vaS2idtype.val<MMDVM.status.val)
+        {
+          vaS2idtype.val=MMDVM.status.val
+          tmp0.txt=t13.txt+"        "
+          substr tmp0.txt,vaS2id.txt,0,9 // take 9 characters of User ID
+          tmp0.txt=t14.txt+"                      "
+          substr tmp0.txt,tmp1.txt,0,26 // take 26 characters of Name
+          vaS2id.txt+=tmp1.txt
+          l0.txt=vaS2id.txt+vaS2tg.txt+vaS2rssi.txt+vaS2BER.txt //for now take a chance same session
+        }
+      }
+    }
+    //TA
+    if(MMDVM.status.val==71)
+    {
+      l0.pco=1024
+    }
+    //Call end
+    if(clearTS2.val==1)
+    {
+      clearTS2.val=0
+      vaS2idtype.val=0
+      vaS2id.txt=""
+      vaS2tg.txt=""
+      vaS2rssi.txt=""
+      vaS2BER.txt=""
+      t0.txt=""
+      t2.txt=""
+      l0.pco=33808
+      l11.txt=l10.txt
+      l10.txt=l9.txt
+      l9.txt=l8.txt
+      l8.txt=l7.txt
+      l7.txt=l6.txt
+      l6.txt=l5.txt
+      l5.txt=l4.txt
+      l4.txt=l3.txt
+      l3.txt=l2.txt
+      l2.txt=l1.txt
+      l1.txt=l0.txt
+      l0.txt=t0.txt
+    }
+  }
+}
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES

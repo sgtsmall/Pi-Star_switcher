@@ -1,0 +1,209 @@
+SYSTEM1(Page)
+Preinitialize Event
+
+
++++++++
+
+b0(Button)
+
+{MENU}
+
+Touch Release Event
+page PAGES
+
++++++++
+
+b1(Button)
+
+{0}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "switcher -s 0"
+printh FF
+printh FF
+printh FF
+
++++++++
+
+b6(Button)
+
+{1}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "switcher -s 1"
+printh FF
+printh FF
+printh FF
+
++++++++
+
+b7(Button)
+
+{2}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "switcher -s 2"
+printh FF
+printh FF
+printh FF
+
++++++++
+
+b8(Button)
+
+{3}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "switcher -s 3"
+printh FF
+printh FF
+printh FF
+
++++++++
+
+b4(Button)
+
+{0-ipsc}
+
+Touch Release Event
+
+va1.txt="switcher -X 0-ipsc"+va0.txt
+printh 2A
+printh F1
+print va1.txt
+printh FF
+printh FF
+printh FF
+bt0.val=0
+va0.txt=""
+
++++++++
+
+b5(Button)
+
+{1-dmrg}
+
+Touch Release Event
+
+va1.txt="switcher -X 1-dmrg"+va0.txt
+printh 2A
+printh F1
+print va1.txt
+printh FF
+printh FF
+printh FF
+bt0.val=0
+va0.txt=""
+
++++++++
+
+b6(Button)
+
+{2-bmei}
+
+Touch Release Event
+
+va1.txt="switcher -X 2-bmei"+va0.txt
+printh 2A
+printh F1
+print va1.txt
+printh FF
+printh FF
+printh FF
+bt0.val=0
+va0.txt=""
+
++++++++
+
+b10(Button)
+
+{3-ysfg}
+
+Touch Release Event
+
+va1.txt="switcher -X 3-ysfg"+va0.txt
+printh 2A
+printh F1
+print va1.txt
+printh FF
+printh FF
+printh FF
+bt0.val=0
+va0.txt=""
+
++++++++
+
+b11(Button)
+
+{upd}
+
+Touch Release Event
+
+va1.txt="switcher -U"+va0.txt
+printh 2A
+printh F1
+print va1.txt
+printh FF
+printh FF
+printh FF
+bt0.val=0
+va0.txt=""
+
++++++++
+
+b3(Button)
+
+{stat}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "switcher -i"
+printh FF
+printh FF
+printh FF
+
++++++++
+
+b2(Button)
+
+{list}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "switcher -l"
+printh FF
+printh FF
+printh FF
+
+
++++++++
+
+bt0(Dual)
+
+{Over-Write}
+
+Touch Release Event
+
+if(bt0.val==1)
+{
+  va0.txt=" -O"
+}else
+{
+  va0.txt=""
+}

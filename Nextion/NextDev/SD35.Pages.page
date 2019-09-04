@@ -1,0 +1,102 @@
+SYSTEM1(Page)
+Preinitialize Event
+
+
++++++++
+
+b0(Button)
+
+{Main}
+
+Touch Release Event
+page MMDVM
+
++++++++
+
+b1(Button)
+
+{Info}
+
+Touch Release Event
+
+page Info
+
++++++++
+
+b2(Button)
+
+{DMR1}
+
+Touch Release Event
+
+if(MMDVM.va13c2.val==1)
+{
+  page DMR1
+}else
+{
+  page DMR3
+}
+
++++++++
+
+b3(Button)
+
+{DMR2}
+
+Touch Release Event
+
+if(MMDVM.va13c2.val==1)
+{
+  page DMR3
+}else
+{
+  page DMR4
+}
+
+
+
++++++++
+
+b4(Button)
+
+{System1}
+
+Touch Release Event
+
+page SYSTEM1
+
++++++++
+
+b5(Button)
+
+{System2}
+
+Touch Release Event
+
+page System2
+
++++++++
+
+b6(Button)
+
+{switcher}
+
+Touch Release Event
+
+page switcher
+
++++++++
+
+b7(Button)
+
+{Upload Nextion}
+
+Touch Release Event
+
+//Upload nextion (old method)
+printh 2A
+printh F0
+print "nohup loadNextion > /dev/null &"
+printh FF
+printh FF
+printh FF

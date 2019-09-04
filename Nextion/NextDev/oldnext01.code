@@ -1,0 +1,107 @@
+// the DMRID/TA field will be processed
+// depending on type (ID, TA, call end) color and font size are set
+//choose font size
+if(MMDVM.status.val==11)
+{
+  t0.txt=""
+  t1.txt=""
+  t2.txt=""
+  t0bis.txt=""
+  t2bis.txt=""
+  t3.txt=""
+  vis t8,0
+  vis t3,1
+  t3bis.txt="IDLE"
+  t4bis.txt="IDLE"
+  t4.txt=""
+  t5.txt=""
+  t6.txt=""
+  t7.txt=""
+  t8.txt=""
+  t13.txt=""
+}
+
+t0.font=3
+t2.font=3
+strlen t0.txt,tmp0.val
+strlen t2.txt,tmp1.val
+if(tmp0.val>29)
+{
+  t0.font=2
+  t2.font=2
+}
+if(tmp1.val>40)
+{
+  t0.font=2
+  t2.font=2
+}
+//text color (for slot 2)
+if(MMDVM.status.val>60)
+{
+  if(MMDVM.status.val<65)
+  {
+    //status 61=listening, 62=ID, 63=TA, 64=call end
+    if(MMDVM.status.val==61)
+    {
+      t0.pco=0
+    }
+    //ID
+    if(MMDVM.status.val==62)
+    {
+      t0.pco=31
+    }
+    //TA
+    if(MMDVM.status.val==63)
+    {
+      t0.pco=1024
+    }
+    //Call end
+    if(MMDVM.status.val==64)
+    {
+      t0.pco=33808
+      if(g1bis.txt!=t0.txt)
+      {
+        g1bis.txt=t0.txt
+      }
+      if(t1bis.txt!=t1.txt)
+      {
+        t1bis.txt=t1.txt
+      }
+    }
+  }
+}
+//text color (for slot 2)
+if(MMDVM.status.val>68)
+{
+  if(MMDVM.status.val<73)
+  {
+    //status 69=listening, 70=ID, 71=TA, 72=call end
+    if(MMDVM.status.val==69)
+    {
+      t2.pco=0
+    }
+    //ID
+    if(MMDVM.status.val==70)
+    {
+      t2.pco=31
+    }
+    //TA
+    if(MMDVM.status.val==71)
+    {
+      t2.pco=1024
+    }
+    //Call end
+    if(MMDVM.status.val==72)
+    {
+      t2.pco=33808
+      if(g2bis.txt!=t2.txt)
+      {
+        g2bis.txt=t2.txt
+      }
+      if(t3bis.txt!=t3.txt)
+      {
+        t3bis.txt=t3.txt
+      }
+    }
+  }
+}

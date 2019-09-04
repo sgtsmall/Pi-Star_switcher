@@ -1,0 +1,176 @@
+DMR4(Page)
+Preinitialize Event
+
+
+//disable 25356 text 46486
+//enable  1472  text 0
+//error   55879
+vis S0,0
+vis t0,0
+vis t0bis,0
+vis t1,0
+vis t2,0
+vis t2bis,0
+vis t3,0
+vis t4,0
+vis t5,0
+vis t6,0
+vis t7,0
+vis t8,0
+l0.txt=""
+l1.txt=""
+l2.txt=""
+l3.txt=""
+l4.txt=""
+l5.txt=""
+l6.txt=""
+l7.txt=""
+l8.txt=""
+l9.txt=""
+l10.txt=""
+l11.txt=""
+t30.txt=MMDVM.va7.txt
+t32.txt=MMDVM.va12.txt
+
+
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+if(MMDVM.status.val==1)
+{
+  l0.txt="idle"
+}
+if(MMDVM.status.val<65)
+{
+  if(MMDVM.status.val>60)
+  {
+    //first remove slot nr
+    substr t0.txt,t0bis.txt,1,40
+    //set color:
+    //status 69=listening, 70=ID, 71=TA, 72=call end
+    if(MMDVM.status.val==61)
+    {
+      l0.pco=0
+    }
+    //ID
+    if(MMDVM.status.val==62)
+    {
+      l0.pco=31
+    }
+    //TA
+    if(MMDVM.status.val==63)
+    {
+      l0.pco=1024
+    }
+    //Call end
+    if(MMDVM.status.val==64)
+    {
+      l0.pco=33808
+    }
+    // t0 : src1 id / call / TA
+    // t1 : dst
+    // t4 : rssi1
+    // t6 : ber1
+    tmp0.txt=t0bis.txt+"                    "
+    substr tmp0.txt,l0.txt,0,25
+    tmp0.txt=t1.txt+"          "
+    substr tmp0.txt,tmp1.txt,0,10
+    l0.txt+=tmp1.txt
+    tmp0.txt=t4.txt+"          "
+    substr tmp0.txt,tmp1.txt,0,10
+    l0.txt+=tmp1.txt
+    tmp0.txt=t6.txt+"          "
+    substr tmp0.txt,tmp1.txt,0,10
+    l0.txt+=tmp1.txt
+    if(MMDVM.status.val==63)
+    {
+      l11.txt=l10.txt
+      l10.txt=l9.txt
+      l9.txt=l8.txt
+      l8.txt=l7.txt
+      l7.txt=l6.txt
+      l6.txt=l5.txt
+      l5.txt=l4.txt
+      l4.txt=l3.txt
+      l3.txt=l2.txt
+      l2.txt=l1.txt
+      l1.txt=l0.txt
+      l0.txt=t0.txt
+    }
+  }
+}
+if(MMDVM.status.val<73)
+{
+  if(MMDVM.status.val>65)
+  {
+    //first remove slot nr
+    substr t2.txt,t2bis.txt,2,40
+    //set color:
+    //status 69=listening, 70=ID, 71=TA, 72=call end
+    if(MMDVM.status.val==69)
+    {
+      l0.pco=0
+    }
+    //ID
+    if(MMDVM.status.val==70)
+    {
+      l0.pco=31
+    }
+    //TA
+    if(MMDVM.status.val==71)
+    {
+      l0.pco=1024
+    }
+    //Call end
+    if(MMDVM.status.val==72)
+    {
+      l0.pco=33808
+    }
+    if(MMDVM.status.val>69)
+    {
+      // t2 : src2 id / call / TA
+      // t3 : dst
+      // t5 : rssi2
+      // t7 : ber2
+      tmp0.txt=t2bis.txt+"                    "
+      substr tmp0.txt,l0.txt,0,25
+      tmp0.txt=t3.txt+"          "
+      substr tmp0.txt,tmp1.txt,0,10
+      l0.txt+=tmp1.txt
+      tmp0.txt=t5.txt+"          "
+      substr tmp0.txt,tmp1.txt,0,10
+      l0.txt+=tmp1.txt
+      tmp0.txt=t7.txt+"          "
+      substr tmp0.txt,tmp1.txt,0,10
+      l0.txt+=tmp1.txt
+    }
+    if(MMDVM.status.val==72)
+    {
+      l11.txt=l10.txt
+      l10.txt=l9.txt
+      l9.txt=l8.txt
+      l8.txt=l7.txt
+      l7.txt=l6.txt
+      l6.txt=l5.txt
+      l5.txt=l4.txt
+      l4.txt=l3.txt
+      l3.txt=l2.txt
+      l2.txt=l1.txt
+      l1.txt=l0.txt
+      l0.txt=t2.txt
+    }
+  }
+}
+
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES

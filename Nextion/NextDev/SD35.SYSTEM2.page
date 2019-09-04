@@ -1,0 +1,124 @@
+SYSTEM1(Page)
+Preinitialize Event
+
+
+
+++++++
+
+S0(Touch Area)
+Touch Press Event
+
+
+++++++
+
+p0(Picture)
+Touch Release Event
+
+
+page PAGES
+
+
++++++++
+
+b0(Button)
+
+{MENU button}
+
+Touch Release Event
+page PAGES
+
++++++++
+
+b1(Button)
+
+{Update Users button}
+
+Touch Release Event
+
+printh 2A
+printh F0
+print "swupdateuser"
+printh FF
+printh FF
+printh FF
+
+
++++++++
+
+b2(Button)
+
+{Restart MMDVMHost}
+
+Touch Release Event
+
+printh 2A
+printh F0
+print "service mmdvmhost restart"
+printh FF
+printh FF
+printh FF
+
+
++++++++
+
+b3(Button)
+
+{System Date}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "date"
+printh FF
+printh FF
+printh FF
+
+
++++++++
+
+b4(Button)
+
+{Reboot}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "reboot"
+printh FF
+printh FF
+printh FF
+
+
++++++++
+
+b5(Button)
+
+{Poweroff}
+
+Touch Release Event
+
+printh 2A
+printh F1
+print "poweroff"
+printh FF
+printh FF
+printh FF
+
+
++++++++
+
+b6(Button)
+
+{nextiondriver reload}
+
+Touch Release Event
+
+
+// load a tft based on model number (NX4832T035)
+printh 2A
+printh FB
+printh FF
+printh FF
+printh FF

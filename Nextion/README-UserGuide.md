@@ -41,7 +41,7 @@ Switcher screen allows selection of profiles to load or store. As well as updati
 
 
 
-![Pi-Star_switcher Overwriting](images/pss-overwrite-protection.png?raw=true "protection from overwriting")
+![Pi-Star_switcher Overwriting](images/pss-overwrite_protection.png?raw=true "protection from overwriting")
 
 If you just press one of the store buttons or update button, it will return an error.
 
@@ -53,7 +53,7 @@ then you can select your overwritng function.
 
 ![Pi-Star_switcher Store a config](images/pss-storeconfig.png?raw=true "Store a Config")
 
-In this examples the current values og the profile are stored in profile 0-ipsc.
+In this examples the current values of the profile are stored in profile 0-ipsc.
 
 ![Pi-Star_switcher System Page 2](images/pss-system2.png?raw=true "System Page 2")
 

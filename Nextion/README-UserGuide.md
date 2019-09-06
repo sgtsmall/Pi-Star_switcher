@@ -55,7 +55,7 @@ then you can select your overwritng function.
 
 In this examples the current values of the profile are stored in profile 0-ipsc.
 
-![Pi-Star_switcher System Page 2](images/pss-system2.png?raw=true "System Page 2")
+![Pi-Star_switcher System Page 2](images/pss_SYSTEM2.png?raw=true "System Page 2")
 
 
 System 2 page has -
@@ -84,13 +84,13 @@ Note that the autoswitch only operates when there is no traffic, as soon as traf
 
 Placeholders
 
-![Pi-Star_switcher MMDVM](images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher MMDVM](images/pss_homescreen.png?raw=true "Menu Screen")
 
-![Pi-Star_switcher DMR1](images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher DMR1](images/pss_DMR1_active_RF.png?raw=true "Menu Screen")
 
-![Pi-Star_switcher DMR2](images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher DMR2](images/pss_DMR1_inactive.png?raw=true "Menu Screen")
 
-![Pi-Star_switcher DStar](images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher DStar](images/pss_DMR2.png?raw=true "Menu Screen")
 
 ![Pi-Star_switcher P25](images/pss-menu.png?raw=true "Menu Screen")
 

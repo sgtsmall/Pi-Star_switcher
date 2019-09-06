@@ -25,12 +25,12 @@
 ### Pi-Star switcher functions
 
 
-![Pi-Star_switcher Menu](docs/images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher Menu](images/pss-menu.png?raw=true "Menu Screen")
 
 Menu page is generally reached by tapping in the area of the top centre icon of pages or the Menu button on some pages. From here choose other pages to go to.
 
 
-![Pi-Star_switcher Switcher](docs/images/pss-switcher.png?raw=true "Switcher Screen")
+![Pi-Star_switcher Switcher](images/pss-switcher.png?raw=true "Switcher Screen")
 
 Switcher screen allows selection of profiles to load or store. As well as updating the user data.
 - *Stat* button tries to determine which profile is active.
@@ -41,21 +41,21 @@ Switcher screen allows selection of profiles to load or store. As well as updati
 
 
 
-![Pi-Star_switcher Overwriting](docs/images/pss-overwrite-protection.png?raw=true "protection from overwriting")
+![Pi-Star_switcher Overwriting](images/pss-overwrite-protection.png?raw=true "protection from overwriting")
 
 If you just press one of the store buttons or update button, it will return an error.
 
-![Pi-Star_switcher Overwrite button](docs/images/pss-overwrite.png?raw=true "overwrite button")
+![Pi-Star_switcher Overwrite button](images/pss-overwrite.png?raw=true "overwrite button")
 
 Toggle the overwrite protection by pressing over write once (turns red)
 then you can select your overwritng function.
 
 
-![Pi-Star_switcher Store a config](docs/images/pss-storeconfig.png?raw=true "Store a Config")
+![Pi-Star_switcher Store a config](images/pss-storeconfig.png?raw=true "Store a Config")
 
 In this examples the current values og the profile are stored in profile 0-ipsc.
 
-![Pi-Star_switcher System Page 2](docs/images/pss-system2.png?raw=true "System Page 2")
+![Pi-Star_switcher System Page 2](images/pss-system2.png?raw=true "System Page 2")
 
 
 System 2 page has -
@@ -69,7 +69,7 @@ System 2 page has -
 
 ### specific to sample pages
 
-![Pi-Star_switcher System Page 1](docs/images/pss-system1.png?raw=true "System Page 1")
+![Pi-Star_switcher System Page 1](images/pss-system1.png?raw=true "System Page 1")
 
 System 1 Page Generally has 3 or 4 fields
 
@@ -84,14 +84,14 @@ Note that the autoswitch only operates when there is no traffic, as soon as traf
 
 Placeholders
 
-![Pi-Star_switcher MMDVM](docs/images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher MMDVM](images/pss-menu.png?raw=true "Menu Screen")
 
-![Pi-Star_switcher DMR1](docs/images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher DMR1](images/pss-menu.png?raw=true "Menu Screen")
 
-![Pi-Star_switcher DMR2](docs/images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher DMR2](images/pss-menu.png?raw=true "Menu Screen")
 
-![Pi-Star_switcher DStar](docs/images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher DStar](images/pss-menu.png?raw=true "Menu Screen")
 
-![Pi-Star_switcher P25](docs/images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher P25](images/pss-menu.png?raw=true "Menu Screen")
 
-![Pi-Star_switcher Fusion](docs/images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher Fusion](images/pss-menu.png?raw=true "Menu Screen")

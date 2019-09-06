@@ -34,7 +34,7 @@ Relies on functionality of NextionDriver by ON7LDS
   * 400x240 3.2
   * 480x320 3.5
 
-![Pi-Star_switcher Menu](docs/images/pss-menu.png?raw=true "Menu Screen")
+![Pi-Star_switcher Menu](Nextion/images/pss-menu.png?raw=true "Menu Screen")
 
 ## Additional Features
 

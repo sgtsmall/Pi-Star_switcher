@@ -31,6 +31,8 @@ usage () {
 
 
 statusgit() {
+ sudo mount -o remount,rw /
+ sleep 2	
  cd $GITHOME
  git remote update &> /dev/null
  UPSTREAM=${1:-'@{u}'}

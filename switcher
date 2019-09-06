@@ -181,11 +181,11 @@ if [  -n "$oupdate" ]; then
     returnmsg
     exit 1
   else
+    sudo mount -o remount,rw /
+    sleep 2
     sleep 1
     msg="`sudo  -u pi-star $PREFIX/swgitstatus`"
     returnmsg
-    sudo mount -o remount,rw /
-    sleep 2
     launcher=`sudo  -u pi-star $PREFIX/swupdater -O >> $CONFDIR/gitupdate.log 2>&1`
     sleep 5
     exit 0

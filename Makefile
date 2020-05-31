@@ -2,7 +2,7 @@
 # Makefile for local scripts
 #
 
-APPS := switcher swstopstart swupdater swgitstatus swupdateuser loadNextion loadNextiond swupdateuser setNextion swupdatetg
+APPS := switcher swstopstart swupdater swgitstatus swupdateuser loadNextion loadNextiond swupdateuser getNextion setNextion swupdatetg
 UDATFILE := UserGroup/groups.txt UserGroup/stripped.csv
 DATFILE := configs/MMDVM.conflist
 PREFIX := /usr/local

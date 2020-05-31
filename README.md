@@ -106,8 +106,10 @@ Usage: swstopstart [stop|start|restart]
 
   will create sym link from a Nextion tft file to the configs directory
 
+New version allows   setNextion -n  to automatically find screen 
+
 ```
-Usage: setNextion [ -h|-v|-l] [-s 32|35 -t B|E -m S|D]"
+Usage: setNextion [ -h|-v|-l|-n] [-s 32|35 -t B|E -m S|D]"
 
 	-l list screens"
      	-s 35 -t B|E -m S|D"

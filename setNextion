@@ -4,92 +4,101 @@
 CONFDIR=/home/pi-star/configs
 DATADIR=/usr/local/etc
 NEXTDIR=/home/pi-star/Pi-Star_switcher/Nextion/
-VERSION="1.1.0 228Aug19"
+GETNEXT="N"
+VERSION="1.2.0 31May20"
 version () {
- msg="Version: $(basename $0) $VERSION"
- returnmsg
- exit 0
+  msg="Version: $(basename $0) $VERSION"
+  returnmsg
+  exit 0
 }
 returnmsg () {
   echo $msg
 }
 
 returncurr () {
-	mcurr=`readlink $CONFDIR/Switcher.tft | xargs -n 1 basename`
+  mcurr=`readlink $CONFDIR/Switcher.tft | xargs -n 1 basename`
 }
 
 
 usage () {
- echo "Usage: $(basename $0) [ -h|-v|-l] [-s 32|35 -t B|E -m S|D]"
- echo ""
- echo "     -l list screens"
- echo "     -s 35 -t B|E -m S|D"
- echo "     -h  This help text"
- echo "     -v   version"
- echo ""
- echo "Example: $(basename $0) "
- echo "Need to specify -s screensize 32 (3.2) or 35 (3.5)"
- echo "	           -t  type is B basic or E enhanced"
- echo "	           -m  mode is D dualhat or S singlehat"
+  echo "Usage: $(basename $0) [ -h|-v|-l|-n] [-s 32|35 -t B|E -m S|D]"
+  echo ""
+  echo "     -l list screens"
+  echo "     -n       set via getNextion"
+  echo "     -s 35 -t B|E -m S|D"
+  echo "     -h  This help text"
+  echo "     -v   version"
+  echo ""
+  echo "Example: $(basename $0) "
+  echo "Need to specify -s screensize 32 (3.2) or 35 (3.5)"
+  echo "	           -t  type is B basic or E enhanced"
+  echo "	           -m  mode is D dualhat or S singlehat"
   echo " Currently little or no checking"
- exit 0
+  exit 0
 }
 
 mand=
 if [ "$1" != "" ]; then
- # for future state with multiple options
- while getopts "lhvs:t:m:" opt ; do
-   case $opt in
-     l ) ls -1 $NEXTDIR*.tft ; exit 0 ;;
-     h ) usage ;;
-     v ) version ;;
-     s ) SCRSIZE="$OPTARG" ; oupdate=0 ;;
-     t ) SCRTYPE="$OPTARG" ; oupdate=0 ;;
-     m ) SCRMODE="$OPTARG" ; oupdate=0 ;;
+  # for future state with multiple options
+  while getopts "lhvns:t:m:" opt ; do
+    case $opt in
+      l ) ls -1 $NEXTDIR*.tft ; exit 0 ;;
+      h ) usage ;;
+      v ) version ;;
+      n ) GETNEXT="Y" ; oupdate=0 ;;
+      s ) SCRSIZE="$OPTARG" ; oupdate=0 ;;
+      t ) SCRTYPE="$OPTARG" ; oupdate=0 ;;
+      m ) SCRMODE="$OPTARG" ; oupdate=0 ;;
 
-    \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
-   esac
- done
- shift $(($OPTIND -1))
- #returncurr
- if [ -n "$oupdate" ] && [ -n "$SCRSIZE" ] && [ -n "$SCRTYPE" ] && [ -n "$SCRMODE" ] ; then {
-	if [ "$SCRSIZE" = "35" ] ; then {
-		NMODEL='NX4832'
-		NSIZE='035'
-		}
-	fi
-	if [ "$SCRSIZE" = "32" ] ; then {
-		NMODEL='NX4024'
-		NSIZE='032'
-		}
-	fi
-	if [ "$SCRTYPE" = "B" ] ; then {
-		SCRTYPE='Basic'
-		NSCRTYPE='T'
-		}
-	fi
-	if [ "$SCRTYPE" = "E" ] ; then {
-		SCRTYPE='Enhanced'
-		NSCRTYPE='K'
-		}
-	fi
-	newfile=$NEXTDIR"Switcher"$SCRMODE"_"$SCRSIZE"_"$SCRTYPE".tft"
-	nextnew=$NMODEL$NSCRTYPE$NSIZE".tft"
-	if [ -f $newfile ] ; then {
-		rm $CONFDIR/Switcher.tft
-		ln -s $newfile $CONFDIR/Switcher.tft
-		sudo ln -s $newfile $DATADIR/$nextnew
-		}
-	fi
-	returncurr
- } else {
- 	echo ""
-	echo " setting requires all 3 options  s, t, m"
-	echo ""
-	usage;
- }
- fi
+      \? ) echo -e "Invalid option, try -h \"for help\"" ; exit 0 ;;
+    esac
+  done
+  shift $(($OPTIND -1))
+  #returncurr
+  if [ -n "$oupdate" ] ; then
+    if [ "$GETNEXT" = "Y" ] ; then
+      DUPLEX=`grep Duplex /etc/mmdvmhost|rev | cut -c1`
+      if [ $DUPLEX = "1" ] ; then SCRMODE="D" ; else SCRMODE="S" ; fi
+      NDATA=`getNextion`
+      NMODEL=${NDATA:0:6}
+      NSCRTYPE=${NDATA:6:1}
+      if [ "$NSCRTYPE" = "T" ] ; then SCRTYPE="B" ; else SCRTYPE="E" ; fi
+      SCRSIZE=${NDATA:8:2}
+      echo " $DUPLEX  $SCRTYPE $SCRSIZE $SCRMODE"
+    fi
+    if [ -n "$SCRSIZE" ] && [ -n "$SCRTYPE" ] && [ -n "$SCRMODE" ] ; then
+      if [ "$SCRSIZE" = "35" ] ; then
+        NMODEL='NX4832'
+        NSIZE='035'
+      fi
+      if [ "$SCRSIZE" = "32" ] ; then
+        NMODEL='NX4024'
+        NSIZE='032'
+      fi
+      if [ "$SCRTYPE" = "B" ] ; then
+        SCRTYPE='Basic'
+        NSCRTYPE='T'
+      fi
+      if [ "$SCRTYPE" = "E" ] ; then
+        SCRTYPE='Enhanced'
+        NSCRTYPE='K'
+      fi
+      newfile=$NEXTDIR"Switcher"$SCRMODE"_"$SCRSIZE"_"$SCRTYPE".tft"
+      nextnew=$NMODEL$NSCRTYPE$NSIZE".tft"
+      if [ -f $newfile ] ; then
+        rm $CONFDIR/Switcher.tft
+        ln -s $newfile $CONFDIR/Switcher.tft
+        sudo ln -s $newfile $DATADIR/$nextnew
+      fi
+      returncurr
+    else
+      echo ""
+      echo " setting requires all 3 options  s, t, m"
+      echo ""
+      usage;
+    fi
+  fi
 else
-	usage
+  usage
 fi
- #  $* is left over
+#  $* is left over

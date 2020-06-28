@@ -4,7 +4,7 @@
 
 APPS := switcher swstopstart swupdater swgitstatus swupdateuser loadNextion loadNextiond swupdateuser getNextion setNextion swupdatetg
 UDATFILE := UserGroup/groups.txt UserGroup/stripped.csv
-DATFILE := configs/MMDVM.conflist
+DATFILE := configs/MMDVM.conflist configs/Switcher.tft
 PREFIX := /usr/local
 SSERVICEDIR := /lib/systemd/system
 INSTALL := install

@@ -38,7 +38,7 @@ reorder.tmp: newuser.tmp
 	awk -F, -f reorder.awk $^ >$@
 
 newuser.tmp:
-	curl  $(CURL_FLAGS) -o $@ "https://www.radioid.net/static/user.csv"
+	curl  $(CURL_FLAGS) -o $@ "https://database.radioid.net/static/user.csv"
 
 newdmrids.tmp:
 	curl  $(CURL_FLAGS) -o $@ "http://www.pistar.uk/downloads/DMRIds.dat"

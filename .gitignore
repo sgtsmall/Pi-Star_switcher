@@ -1,2 +1,4 @@
 .DS_Store
 UserGroup/*.tmp
+UserGroup/groups.txt
+UserGroup/stripped.csv

@@ -77,9 +77,10 @@ For updates use
 
 [docs/Installer-Nextion.md]
 
-### Optional - Pi-Star - mobile
+### ~~Optional - Pi-Star - mobile~~
 
-these are great mobile device web pages not sure of the future of these.
+~~these are great mobile device web pages not sure of the future of these.~~
+  * I will remove this shortly, the default web is mobile friendly enough.
 
 ```
 rpi-rw
@@ -91,4 +92,4 @@ sudo rm data.csv
 sudo ln -s /usr/local/etc/stripped.csv data.csv
 ```
 
-These last 3 steps link the user data files so you just need to update one.
+~~These last 3 steps link the user data files so you just need to update one.~~

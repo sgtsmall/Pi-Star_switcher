@@ -4,6 +4,7 @@ Originally developed to support Nextion touch screen change.
 Lots to do
 Relies on functionality of NextionDriver by ON7LDS
 
+
 ## Aug 19 Screen development is being done in Nextion 0.53 LTS version I had a quick try with 0.58 and everything blew up!
 
 
@@ -106,7 +107,7 @@ Usage: swstopstart [stop|start|restart]
 
   will create sym link from a Nextion tft file to the configs directory
 
-New version allows   setNextion -n  to automatically find screen 
+New version allows   setNextion -n  to automatically find screen
 
 ```
 Usage: setNextion [ -h|-v|-l|-n] [-s 32|35 -t B|E -m S|D]"

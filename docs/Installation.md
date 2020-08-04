@@ -21,14 +21,48 @@ Here is the package which contains several detailed readme files
 [Github on7lds NextionDriver](https://github.com/on7lds/NextionDriver)
 
 
-- start with clean img (3.4.x tested ok, 4.1 beta sort of works still testing)
+- start with clean pi-star img (3.4.x tested ok, 4.1 beta sort of works still testing)
 - (copy wpa_supplicant to boot and reboot)
  - or use new autoap feature
-- Make sure you only add the proper wifi and reboot at this stage otherwise pi-star starts tring to set lots of things which are impacted by no real network.
+- Make sure you only add the proper wifi and reboot at this stage otherwise pi-star starts trying to set lots of things which are impacted by no real network.
 
 - Pi-star setup hostname callsign location apply then update
-- plug in display and setup (/dev/ttyUSB0)
-- NextionDriverInstaller Install (will find the config entry of USB0 and fix the config files)
+- plug in display and setup in pi-star config MMDVM Display Type Nextion, Port /dev/ttyUSB0, Layout ON7LDS L3 HS
+
+
+
+# Update Jul-2020 newer versions of pi-star install with /usr/local/bin/NextionDriver binary but no config, this breaks the install scripts from the NextionDriverInstaller.
+
+details on the setup is in installation-Nextion.md  document
+
+```
+rpi-rw
+cd      # is expecting to be running from $HOME
+git clone https://github.com/on7lds/NextionDriverInstaller.git
+cd NextionDriverInstaller
+sudo ./NextionDriver_ConvertConfig /etc/mmdvmhost
+sudo cp nextiondriver.service.binary.pistar /usr/local/sbin/nextiondriver.service
+sudo cp mmdvmhost.service.pistar /lib/systemd/system/mmdvmhost.service
+sudo cp nextiondriver.service.pistar /lib/systemd/system/nextiondriver.service
+sudo systemctl daemon-reload
+```
+
+NextionDriver and all its functions are now setup and should stop/start as required.
+
+```
+rpi-rw
+git clone https://github.com/sgtsmall/Pi-Star_switcher
+cd Pi-Star_switcher
+sudo make install
+sudo make install-list  
+sudo make install-user  
+swupdateuser  
+cd
+```
+
+
+
+  - NextionDriverInstaller Install (will find the config entry of USB0 and fix the config files)
 - Install Pi-star switcher
 
 ### Nano-spot

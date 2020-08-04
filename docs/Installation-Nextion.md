@@ -7,9 +7,7 @@ It was initially developed with the QAN (Quick and Nasty) principle.
 
 ## Install Dependencies
 
-
-Dependent on on7lds NextionDriver functionality for touch screen
-
+#### Aug-2020 this is not needed ?
 python serial
 
 ```
@@ -17,8 +15,31 @@ $ rpi-rw
 $ sudo apt-get install python-serial
 ```
 
+
 ### Install nextiondriver
 
+Newer versions of pi-star seem to partially install NextionDriver
+
+Here are the remaining steps
+
+```
+rpi-rw
+cd      # is expecting to be running from $HOME
+git clone https://github.com/on7lds/NextionDriverInstaller.git
+cd NextionDriverInstaller
+sudo ./NextionDriver_ConvertConfig /etc/mmdvmhost
+sudo cp nextiondriver.service.binary.pistar /usr/local/sbin/nextiondriver.service
+sudo cp mmdvmhost.service.pistar /lib/systemd/system/mmdvmhost.service
+sudo cp nextiondriver.service.pistar /lib/systemd/system/nextiondriver.service
+sudo systemctl daemon-reload
+```
+
+NextionDriver and all its functions are now setup and should stop/start as required.
+
+
+
+
+Otherwise:
 Install the on7lds nextiondriver if not already done
 
 ```
@@ -36,6 +57,8 @@ Check that appropriate settings have been configured in /etc/mmdvmhost
 Recommend the following changes:
 
 - Parameter ShowModesStatus=1
+
+### Old process required manual edit of mmdvmhost - this should now be accomplished by the scripts above.
 
 You have to manually edit the file /etc/mmdvmhost to add this
 
